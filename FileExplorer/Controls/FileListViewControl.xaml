@@ -1,0 +1,522 @@
+﻿<dxg:GridControl x:Class="FileExplorer.Controls.FileListViewControl"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                 xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                 xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                 xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                 xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+                 xmlns:dxfui="http://schemas.devexpress.com/winfx/2008/xaml/core/filteringui"
+                 xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                 xmlns:main="clr-namespace:FileExplorer"
+                 xmlns:common="clr-namespace:FileExplorer.Core"
+                 xmlns:controls="clr-namespace:FileExplorer.Controls"
+                 xmlns:settings="clr-namespace:FileExplorer.Properties"
+                 SelectionMode="Row" AutoExpandAllGroups="True" AllowInitiallyFocusedRow="False" ClipboardCopyMode="None"
+                 dx:DXSerializer.StoreLayoutMode="All" dxg:GridSerializationOptions.AddNewColumns="False" dxg:GridSerializationOptions.RemoveOldColumns="False">
+
+    <dxg:GridControl.Resources>
+        <dxmvvm:BooleanToObjectConverter x:Key="BooleanToEditFormShowModeConverter" TrueValue="None" FalseValue="InlineHideRow" />
+        <Style TargetType="dxg:GridColumnHeader">
+            <Setter Property="FontWeight" Value="Medium" />
+        </Style>
+        <Style x:Key="FileIconImageStyle" TargetType="Image">
+            <Setter Property="Margin" Value="3,0" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Row.IsHidden}" Value="True">
+                    <Setter Property="Opacity" Value="0.5" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="FileNameEditStyle" TargetType="dxe:TextEdit">
+            <Setter Property="ShowError" Value="False" />
+            <Setter Property="ShowErrorToolTip" Value="False" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+            <Setter Property="EditValue" Value="{Binding Row.Name}" />
+            <Setter Property="ToolTip" Value="{Binding Row.FullName}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding View.DataContext.Settings.ShowFileExtensions}" Value="True">
+                    <Setter Property="EditValue" Value="{Binding Row.FullName}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Row.IsSystem}" Value="True">
+                    <Setter Property="Foreground" Value="#F26543" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="CheckBoxSelectorStyle" TargetType="dxe:CheckEdit">
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="IsChecked">
+                <Setter.Value>
+                    <Binding Path="IsSelected" Mode="OneWay" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Visibility">
+                <Setter.Value>
+                    <Binding Path="View.DataContext.Settings.ShowCheckBoxes" Converter="{dxmvvm:BooleanToVisibilityConverter}" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CardViewBorderStyle" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource {dxgt:LWKey GridRow.BorderNoneBrush}}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource {dxgt:LWKey GridRow.TextUnfocusedBrush}}" />
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsMouseOver" Value="True" />
+                        <Condition Property="dxg:CardView.IsFocusedRow" Value="False" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background" Value="{DynamicResource {dxgt:LWKey GridRow.BorderSelectedBrush}}" />
+                    <Setter Property="TextBlock.Foreground" Value="{DynamicResource {dxgt:LWKey GridRow.TextRowSelectedBrush}}"/>
+                </MultiTrigger>
+                <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource {dxgt:LWKey GridRow.BorderFocusedBrush}}" />
+                    <Setter Property="TextBlock.Foreground" Value="{DynamicResource {dxgt:LWKey GridRow.TextFocusedBrush}}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsFocused}" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource {dxgt:LWKey GridRow.BorderFocusedBrush}}" />
+                    <Setter Property="TextBlock.Foreground" Value="{DynamicResource {dxgt:LWKey GridRow.TextFocusedBrush}}"  />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="CardViewStyle" TargetType="dxg:CardView">
+            <Setter Property="CardLayout" Value="Rows" />
+            <Setter Property="CardTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Border Style="{StaticResource CardViewBorderStyle}">
+                            <StackPanel x:Name="Container" Margin="10" Width="100">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <dxe:CheckEdit Style="{StaticResource CheckBoxSelectorStyle}" />
+                                    <Image x:Name="IconImage" Style="{StaticResource FileIconImageStyle}" />
+                                </StackPanel>
+                                <dxg:CardCellContentPresenter x:Name="CellEditor" FieldName="Name" NavigationIndex="0" />
+                            </StackPanel>
+                        </Border>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding View.DataContext.Layout}" Value="{x:Static common:Layout.List}">
+                                <Setter TargetName="Container" Property="Width" Value="200" />
+                                <Setter TargetName="Container" Property="Orientation" Value="Horizontal" />
+                                <Setter TargetName="CellEditor" Property="Width" Value="160" />
+                                <Setter TargetName="IconImage" Property="Width" Value="16" />
+                                <Setter TargetName="IconImage" Property="Height" Value="16" />
+                                <Setter TargetName="IconImage" Property="Source" Value="{Binding Row.SmallIcon}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding View.DataContext.Layout}" Value="{x:Static common:Layout.SmallIcons}">
+                                <Setter TargetName="Container" Property="Width" Value="200" />
+                                <Setter TargetName="Container" Property="Orientation" Value="Horizontal" />
+                                <Setter TargetName="CellEditor" Property="Width" Value="160" />
+                                <Setter TargetName="IconImage" Property="Width" Value="16" />
+                                <Setter TargetName="IconImage" Property="Height" Value="16" />
+                                <Setter TargetName="IconImage" Property="Source" Value="{Binding Row.SmallIcon}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding View.DataContext.Layout}" Value="{x:Static common:Layout.MediumIcons}">
+                                <Setter TargetName="CellEditor" Property="HorizontalAlignment" Value="Center" />
+                                <Setter TargetName="IconImage" Property="Width" Value="32" />
+                                <Setter TargetName="IconImage" Property="Height" Value="32" />
+                                <Setter TargetName="IconImage" Property="Source" Value="{Binding Row.MediumDisplayImage}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding View.DataContext.Layout}" Value="{x:Static common:Layout.LargeIcons}">
+                                <Setter TargetName="Container" Property="Width" Value="150" />
+                                <Setter TargetName="CellEditor" Property="HorizontalAlignment" Value="Center" />
+                                <Setter TargetName="IconImage" Property="Width" Value="48" />
+                                <Setter TargetName="IconImage" Property="Height" Value="48" />
+                                <Setter TargetName="IconImage" Property="Source" Value="{Binding Row.LargeDisplayImage}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding View.DataContext.Layout}" Value="{x:Static common:Layout.ExtraLargeIcons}">
+                                <Setter TargetName="Container" Property="Width" Value="{DXBinding '360 / $main:App.Dpi'}" />
+                                <Setter TargetName="CellEditor" Property="HorizontalAlignment" Value="Center" />
+                                <Setter TargetName="IconImage" Property="Width" Value="{DXBinding '256 / $main:App.Dpi'}" />
+                                <Setter TargetName="IconImage" Property="Height" Value="{DXBinding '256 / $main:App.Dpi'}" />
+                                <Setter TargetName="IconImage" Property="Source" Value="{Binding Row.ExtraLargeDisplayImage}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding View.DataContext.Layout}" Value="{x:Static common:Layout.Thumbnails}">
+                                <Setter TargetName="Container" Property="Width" Value="{DXBinding '$settings:Settings.Default.ThumbnailWidth + 32'}" />
+                                <Setter TargetName="Container" Property="Height" Value="{DXBinding '$settings:Settings.Default.ThumbnailHeight + 32'}" />
+                                <Setter TargetName="CellEditor" Property="HorizontalAlignment" Value="Center" />
+                                <Setter TargetName="IconImage" Property="Source" Value="{Binding Row.ThumbnailLayoutPreviewImage}" />
+                            </DataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding View.DataContext.Layout}" Value="{x:Static common:Layout.MediumIcons}" />
+                                    <Condition Binding="{Binding View.DataContext.Settings.ShowLayoutImagePreviews}" Value="True" />
+                                    <Condition Binding="{Binding Row.IsImage}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="Container" Property="Width" Value="140" />
+                                <Setter TargetName="IconImage" Property="Width" Value="120" />
+                                <Setter TargetName="IconImage" Property="Height" Value="90" />
+                                <Setter TargetName="IconImage" Property="Stretch" Value="Uniform" />
+                                <Setter TargetName="IconImage" Property="Source" Value="{Binding Row.ThumbnailLayoutPreviewImage}" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding View.DataContext.Layout}" Value="{x:Static common:Layout.LargeIcons}" />
+                                    <Condition Binding="{Binding View.DataContext.Settings.ShowLayoutImagePreviews}" Value="True" />
+                                    <Condition Binding="{Binding Row.IsImage}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="Container" Property="Width" Value="200" />
+                                <Setter TargetName="IconImage" Property="Width" Value="180" />
+                                <Setter TargetName="IconImage" Property="Height" Value="135" />
+                                <Setter TargetName="IconImage" Property="Stretch" Value="Uniform" />
+                                <Setter TargetName="IconImage" Property="Source" Value="{Binding Row.ThumbnailLayoutPreviewImage}" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding View.DataContext.Layout}" Value="{x:Static common:Layout.ExtraLargeIcons}" />
+                                    <Condition Binding="{Binding View.DataContext.Settings.ShowLayoutImagePreviews}" Value="True" />
+                                    <Condition Binding="{Binding Row.IsImage}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="Container" Property="Width" Value="{DXBinding '440 / $main:App.Dpi'}" />
+                                <Setter TargetName="IconImage" Property="Width" Value="{DXBinding '400 / $main:App.Dpi'}" />
+                                <Setter TargetName="IconImage" Property="Height" Value="{DXBinding '300 / $main:App.Dpi'}" />
+                                <Setter TargetName="IconImage" Property="Stretch" Value="Uniform" />
+                                <Setter TargetName="IconImage" Property="Source" Value="{Binding Row.ThumbnailLayoutPreviewImage}" />
+                            </MultiDataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Layout}" Value="{x:Static common:Layout.List}">
+                    <Setter Property="CardLayout" Value="Columns" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <DataTemplate x:Key="EditFormTemplate">
+            <dxg:EditFormEditor FieldName="Name" />
+        </DataTemplate>
+        <DataTemplate x:Key="NameCellDisplayTemplate">
+            <StackPanel Margin="3,0,0,0" Orientation="Horizontal" DataContext="{Binding RowData}">
+                <dxe:CheckEdit Style="{StaticResource CheckBoxSelectorStyle}" />
+                <Image Width="16" Height="16" Source="{Binding Row.SmallIcon}" Style="{StaticResource FileIconImageStyle}" />
+                <dxe:TextEdit Name="PART_Editor" Style="{StaticResource FileNameEditStyle}" />
+            </StackPanel>
+        </DataTemplate>
+        <ControlTemplate x:Key="{dxgt:LWKey GridCard.ContainerTemplate}" TargetType="{x:Type ContentControl}">
+            <ContentPresenter />
+        </ControlTemplate>
+        <ControlTemplate x:Key="FocusedRowBorderTemplate">
+            <Border BorderThickness="1" BorderBrush="{DynamicResource {dxgt:LWKey GridRow.BorderFocusedBrush}}" />
+        </ControlTemplate>
+        <ControlTemplate x:Key="FocusedCardBorderTemplate" />
+        <controls:TableViewEx x:Key="ListView" AllowEditing="False" AllowMergedGrouping="True" AllowConditionalFormattingMenu="True"
+                              AllowDragDrop="True" AllowSortedDataDragDrop="True" DragDropHintTemplate="{StaticResource DragDropHintTemplate}"
+                              ShowFocusedRectangle="False" ShowFixedTotalSummary="True" ShowGroupPanel="False" ShowGroupedColumns="True"
+                              ColumnFilterPopupMode="Excel" FilterEditorShowOperandTypeIcon="True"
+                              ShowAutoFilterRow="True" AutoFilterRowPosition="Header" AutoFilterRowClearButtonMode="Always"
+                              ShowSearchPanelMode="Never" SearchColumns="Name;Extension" IncrementalSearchMode="{Binding SearchText, Converter={common:StringToIncrementalSearchModeConverter}}"
+                              HighlightItemOnHover="True" ClipboardMode="Formatted" ClipboardCopyOptions="All"
+                              ShowVerticalLines="False" ShowHorizontalLines="False" VerticalScrollbarVisibility="Auto" AutoWidth="True"
+                              AllowCascadeUpdate="{Binding Virtualization, Source={x:Static settings:Settings.Default}}"
+                              ShowIndicator="{DXBinding 'Settings.ShowRowNumbers and Layout==$common:Layout.Details'}"
+                              IndicatorWidth="{DXBinding '(@a($dxg:GridControl).VisibleRowCount.ToString().Length * 6) + 16'}"
+                              EditFormPostConfirmation="None" EditFormPostMode="Immediate" NavigationStyle="Row"
+                              ShowEditFormOnDoubleClick="False" ShowEditFormOnEnterKey="False" ShowEditFormOnF2Key="False" FocusedRowBorderTemplate="{StaticResource FocusedRowBorderTemplate}"
+                              EditFormTemplate="{StaticResource EditFormTemplate}" EditFormShowMode="{Binding CurrentItem.Parent.IsRoot, RelativeSource={RelativeSource AncestorType=dxg:GridControl}, Converter={StaticResource BooleanToEditFormShowModeConverter}}">
+            <dxmvvm:Interaction.Behaviors>
+                <common:CustomColumnBehavior />
+                <common:AllowDragDropBehavior />
+                <common:SortOrderOnHeaderClickBehavior />
+                <common:DragDropFilesBehavior CurrentFolderPath="{Binding CurrentFolder.FullPath}" />
+            </dxmvvm:Interaction.Behaviors>
+            <dxg:TableView.ColumnMenuCustomizations>
+                <dxb:BarButtonItem Content="{Binding PrintPreview, Source={StaticResource ResourceProvider}}" Glyph="/Assets/SVG/Print.svg"
+                                   Command="{Binding View.GridViewCommands.ShowPrintPreviewDialog}" dxb:BarItemLinkActionBase.ItemLinkIndex="0" />
+                <dxb:BarButtonItem Content="{Binding CopyThisColumn, Source={StaticResource ResourceProvider}}" dxb:BarItemLinkActionBase.ItemLinkIndex="1"
+                                   Command="{DXCommand 'DataControl.CopySelectedRowsToClipboard(Column)'}" />
+                <dxb:BarButtonItem Content="{Binding CopyAllColumns, Source={StaticResource ResourceProvider}}" dxb:BarItemLinkActionBase.ItemLinkIndex="2"
+                                   Command="{DXCommand 'DataControl.CopySelectedRowsToClipboard()'}" />
+                <dxb:BarItemSeparator dxb:BarItemLinkActionBase.ItemLinkIndex="3" />
+                <dxb:BarCheckItem Content="{Binding UnifiedSorting, Source={StaticResource ResourceProvider}}" dxb:BarItemLinkActionBase.ItemLinkIndex="7"
+                                  IsChecked="{Binding LocalSettings.UnifiedSorting, RelativeSource={RelativeSource AncestorType=controls:FileListViewControl}}" />
+            </dxg:TableView.ColumnMenuCustomizations>
+            <dxg:TableView.RowIndicatorContentTemplate>
+                <DataTemplate>
+                    <TextBlock Margin="0,0,0,2" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Medium" Text="{Binding RowHandle.Value, Converter={common:RowHandleToRowNumberConverter}}" />
+                </DataTemplate>
+            </dxg:TableView.RowIndicatorContentTemplate>
+        </controls:TableViewEx>
+        <controls:CardViewEx x:Key="CardView" AllowEditing="False" AllowMergedGrouping="True"
+                             AllowDragDrop="True" AllowSortedDataDragDrop="True" DragDropHintTemplate="{StaticResource DragDropHintTemplate}"
+                             ShowFocusedRectangle="False" ShowFixedTotalSummary="True" ShowGroupPanel="False" ShowGroupedColumns="True"
+                             ColumnFilterPopupMode="Excel" FilterEditorShowOperandTypeIcon="True"
+                             ShowSearchPanelMode="Never" SearchColumns="Name;Extension" IncrementalSearchMode="{Binding SearchText, Converter={common:StringToIncrementalSearchModeConverter}}"
+                             ScrollViewer.IsDeferredScrollingEnabled="True" EnableImmediatePosting="True" NavigationStyle="Row"
+                             SeparatorThickness="0" CardMargin="0" Style="{StaticResource CardViewStyle}" FocusedCardBorderTemplate="{StaticResource FocusedCardBorderTemplate}">
+            <dxmvvm:Interaction.Behaviors>
+                <common:CustomColumnBehavior />
+                <common:AllowDragDropBehavior />
+                <common:SortOrderOnHeaderClickBehavior />
+                <common:DragDropFilesBehavior CurrentFolderPath="{Binding CurrentFolder.FullPath}" />
+            </dxmvvm:Interaction.Behaviors>
+            <dxg:CardView.ColumnMenuCustomizations>
+                <dxb:BarCheckItem Content="{Binding UnifiedSorting, Source={StaticResource ResourceProvider}}" dxb:BarItemLinkActionBase.ItemLinkIndex="3"
+                                  IsChecked="{Binding LocalSettings.UnifiedSorting, RelativeSource={RelativeSource AncestorType=controls:FileListViewControl}}" />
+            </dxg:CardView.ColumnMenuCustomizations>
+        </controls:CardViewEx>
+        <controls:TreeViewEx x:Key="TreeView" AllowEditing="False" AllowConditionalFormattingMenu="True"
+                             AllowDragDrop="True" AllowSortedDataDragDrop="True" DragDropHintTemplate="{StaticResource DragDropHintTemplate}"                                    
+                             ShowFocusedRectangle="False" ShowFixedTotalSummary="True"
+                             ColumnFilterPopupMode="Excel" FilterEditorShowOperandTypeIcon="True" ShowAutoFilterRow="True" AutoFilterRowPosition="Header" AutoFilterRowClearButtonMode="Always"
+                             ShowSearchPanelMode="Never" SearchColumns="Name;Extension" IncrementalSearchMode="{Binding SearchText, Converter={common:StringToIncrementalSearchModeConverter}}"
+                             ShowIndicator="False" NavigationStyle="Row" HighlightItemOnHover="True" ClipboardMode="Formatted" ClipboardCopyOptions="All"
+                             ShowVerticalLines="False" ShowHorizontalLines="False" VerticalScrollbarVisibility="Auto" AutoWidth="True"
+                             AllowCascadeUpdate="{Binding Virtualization, Source={x:Static settings:Settings.Default}}"
+                             TreeDerivationMode="ChildNodesSelector" ChildNodesPath="Content" AllowChildNodeSourceUpdates="True"
+                             HasChildNodesPath="IsDirectory" FetchSublevelChildrenOnExpand="False" PrintExpandButtons="False"
+                             EditFormPostConfirmation="None" EditFormPostMode="Immediate"
+                             ShowEditFormOnDoubleClick="False" ShowEditFormOnEnterKey="False" ShowEditFormOnF2Key="False" FocusedRowBorderTemplate="{StaticResource FocusedRowBorderTemplate}"
+                             EditFormTemplate="{StaticResource EditFormTemplate}" EditFormShowMode="{Binding CurrentItem.Parent.IsRoot, RelativeSource={RelativeSource AncestorType=dxg:GridControl}, Converter={StaticResource BooleanToEditFormShowModeConverter}}">
+            <dxmvvm:Interaction.Behaviors>
+                <common:CustomColumnBehavior />
+                <common:DragDropFilesBehavior />
+                <common:FileModelTreeViewBehavior />
+                <common:SortOrderOnHeaderClickBehavior />
+            </dxmvvm:Interaction.Behaviors>
+            <dxg:TreeListView.ColumnMenuCustomizations>
+                <dxb:BarButtonItem Content="{Binding PrintPreview, Source={StaticResource ResourceProvider}}" Glyph="/Assets/SVG/Print.svg"
+                                   Command="{Binding View.TreeListCommands.ShowPrintPreviewDialog}" dxb:BarItemLinkActionBase.ItemLinkIndex="0" />
+                <dxb:BarButtonItem Content="{Binding CopyThisColumn, Source={StaticResource ResourceProvider}}" dxb:BarItemLinkActionBase.ItemLinkIndex="1"
+                                   Command="{DXCommand 'DataControl.CopySelectedRowsToClipboard(Column)'}" />
+                <dxb:BarButtonItem Content="{Binding CopyAllColumns, Source={StaticResource ResourceProvider}}" dxb:BarItemLinkActionBase.ItemLinkIndex="2"
+                                   Command="{DXCommand 'DataControl.CopySelectedRowsToClipboard()'}" />
+                <dxb:BarItemSeparator dxb:BarItemLinkActionBase.ItemLinkIndex="3" />
+                <dxb:BarCheckItem Content="{Binding UnifiedSorting, Source={StaticResource ResourceProvider}}" dxb:BarItemLinkActionBase.ItemLinkIndex="7"
+                                  IsChecked="{Binding LocalSettings.UnifiedSorting, RelativeSource={RelativeSource AncestorType=controls:FileListViewControl}}" />
+            </dxg:TreeListView.ColumnMenuCustomizations>
+        </controls:TreeViewEx>
+        <DXDataTemplateSelector x:Key="FileSizeTemplateSelector">
+            <DXDataTemplateTrigger Binding="{Binding RowData.Row.IsDrive}" Value="True">
+                <DataTemplate>
+                    <dxe:ProgressBarEdit x:Name="PART_Editor" Background="Transparent" ContentDisplayMode="Value" DisplayTextConverter="{common:IntToFileSizeConverter}"
+                                         Maximum="{Binding RowData.Row.Size}" EditValue="{DXBinding 'RowData.Row.Size - RowData.Row.FreeSpace', Mode=OneWay}" />
+                </DataTemplate>
+            </DXDataTemplateTrigger>
+            <DXDataTemplateTrigger Binding="{Binding RowData.Row.IsDirectory}" Value="False">
+                <DataTemplate>
+                    <dxe:ProgressBarEdit x:Name="PART_Editor" Background="Transparent" ContentDisplayMode="Value" DisplayTextConverter="{common:IntToFileSizeConverter}"
+                                         Maximum="{Binding RowData.Row.Parent.LargestFileSize}" EditValue="{Binding RowData.Row.Size, Mode=OneWay}" />
+                </DataTemplate>
+            </DXDataTemplateTrigger>
+            <DXDataTemplateTrigger Binding="{DXBinding '!RowData.Row.IsDirectory and View.DataContext.SearchText != `` and View.DataContext.Settings.DefaultSearch == 1'}" Value="True">
+                <DataTemplate>
+                    <dxe:ProgressBarEdit x:Name="PART_Editor" Background="Transparent" ContentDisplayMode="Value" DisplayTextConverter="{common:IntToFileSizeConverter}"
+                                         Maximum="{Binding View.DataContext.LargestFileSize}" EditValue="{Binding RowData.Row.Size, Mode=OneWay}" />
+                </DataTemplate>
+            </DXDataTemplateTrigger>
+        </DXDataTemplateSelector>
+        <DXDataTemplateSelector x:Key="NameCellDisplayTemplateSelector">
+            <DXDataTemplateTrigger Binding="{Binding View.DataContext.Layout}" Value="Details" Template="{StaticResource NameCellDisplayTemplate}" />
+            <DXDataTemplateTrigger Binding="{Binding View.DataContext.Layout}" Value="Content" Template="{StaticResource NameCellDisplayTemplate}" />
+        </DXDataTemplateSelector>        
+    </dxg:GridControl.Resources>
+
+    <dxg:GridControl.Style>
+        <Style TargetType="dxg:GridControl">
+            <Setter Property="View" Value="{StaticResource ListView}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Layout}" Value="{x:Static common:Layout.Details}">
+                    <Setter Property="View" Value="{StaticResource ListView}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Layout}" Value="{x:Static common:Layout.Content}">
+                    <Setter Property="View" Value="{StaticResource TreeView}" />
+                </DataTrigger>
+                <DataTrigger Binding="{DXBinding 'Layout != $common:Layout.Details and Layout != $common:Layout.Content'}" Value="True">
+                    <Setter Property="View" Value="{StaticResource CardView}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </dxg:GridControl.Style>
+
+    <dxmvvm:Interaction.Behaviors>
+        <common:FileModelGroupBehavior />
+        <common:NativeContextMenuBehavior CurrentFolder="{Binding CurrentFolder}" />
+        <common:MouseEventToCommand MouseButton="Middle" Event="PreviewMouseDown" PassEventArgsToCommand="True" 
+                                    MarkRoutedEventsAsHandled="True" Command="{Binding OpenInNewTabCommand}" EventArgsConverter="{dx:EventArgsToDataRowConverter}" />
+        <common:MouseEventToCommand MouseButton="XButton1" Event="PreviewMouseDown" PassEventArgsToCommand="True" 
+                                    MarkRoutedEventsAsHandled="True" ExecuteCommandWhenParameterNull="True" Command="{Binding MoveBackCommand}" />
+        <common:MouseEventToCommand MouseButton="XButton2" Event="PreviewMouseDown" PassEventArgsToCommand="True" 
+                                    MarkRoutedEventsAsHandled="True" ExecuteCommandWhenParameterNull="True" Command="{Binding MoveNextCommand}" />        
+    </dxmvvm:Interaction.Behaviors>
+
+    <dxg:GridControl.Columns>
+        <dxg:GridColumn FieldName="Name" Width="250" SortMode="Custom" SortOrder="Ascending" AllowEditing="True" AutoFilterCriteria="Contains" ShowCriteriaInAutoFilterRow="True"
+                        Header="{Binding Name, Source={StaticResource ResourceProvider}}" CellDisplayTemplateSelector="{StaticResource NameCellDisplayTemplateSelector}">
+            <dxg:GridColumn.CellDisplayTemplate>
+                <DataTemplate>
+                    <dxe:TextEdit Name="PART_Editor" Style="{StaticResource FileNameEditStyle}" />
+                </DataTemplate>
+            </dxg:GridColumn.CellDisplayTemplate>
+            <dxg:GridColumn.EditFormTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="3,0,0,0" Orientation="Horizontal" DataContext="{Binding RowData.Source}">
+                        <dxe:CheckEdit Style="{StaticResource CheckBoxSelectorStyle}" />
+                        <Image Width="16" Height="16" Source="{Binding Row.SmallIcon}" Style="{StaticResource FileIconImageStyle}" />
+                        <dxe:ButtonEdit Name="PART_Editor" AllowDefaultButton="False">
+                            <dxmvvm:Interaction.Behaviors>
+                                <dxmvvm:KeyToCommand KeyGesture="Enter" EventName="KeyDown" MarkRoutedEventsAsHandled="True" Command="{Binding View.Commands.CloseEditForm}" />
+                            </dxmvvm:Interaction.Behaviors>
+                            <dxe:ButtonInfo GlyphKind="Apply" ToolTip="{Binding OK, Source={StaticResource ResourceProvider}}" Command="{Binding View.Commands.CloseEditForm}" Margin="20,0,0,0" />
+                            <dxe:ButtonInfo GlyphKind="Cancel" ToolTip="{Binding Cancel, Source={StaticResource ResourceProvider}}" Command="{Binding View.Commands.HideEditForm}" />
+                            <dxe:ButtonInfo GlyphKind="Regular" ToolTip="{Binding Advanced, Source={StaticResource ResourceProvider}}">
+                                <dxmvvm:Interaction.Behaviors>
+                                    <dxmvvm:CompositeCommandBehavior>
+                                        <dxmvvm:CommandItem Command="{Binding View.Commands.HideEditForm}" />
+                                        <dxmvvm:CommandItem Command="{Binding View.DataContext.RenameCommand}" CommandParameter="{Binding Row}" />
+                                    </dxmvvm:CompositeCommandBehavior>
+                                </dxmvvm:Interaction.Behaviors>
+                            </dxe:ButtonInfo>
+                        </dxe:ButtonEdit>
+                    </StackPanel>
+                </DataTemplate>
+            </dxg:GridColumn.EditFormTemplate>
+        </dxg:GridColumn>
+        <dxg:GridColumn FieldName="Description" Header="{Binding Type, Source={StaticResource ResourceProvider}}" SortMode="Custom" SortFieldName="Extension" AllowAutoFilter="False" AllowIncrementalSearch="False" />
+        <dxg:GridColumn FieldName="Extension" Header="{Binding Extension, Source={StaticResource ResourceProvider}}" SortMode="Custom" Visible="False" AllowAutoFilter="False" AllowIncrementalSearch="False">
+            <dxg:GridColumn.PredefinedFilters>
+                <dxfui:PredefinedFilterCollection>
+                    <dxfui:PredefinedFilter Name="Image" Filter="?p IN ('.BMP','.PNG','.JPG','.JPEG','.GIF','.ICO','.SVG','.TIF','.TIFF','.PSD')" />
+                    <dxfui:PredefinedFilter Name="Video" Filter="?p IN ('.AVI','.WMV','.MP4','.MKV','.MOV','.MPG','.MPEG','.M4V','.SWF','.3GP','.FLV','.RM','.VOB')" />
+                    <dxfui:PredefinedFilter Name="Audio" Filter="?p IN ('.WAV','.WMA','.MP3','.MPA','.OGG','.MID','.MIDI')" />
+                    <dxfui:PredefinedFilter Name="Archive" Filter="?p IN ('.7Z','.ZIP','.RAR','.TAR','.GZIP','.LZMA','.CAB')" />
+                    <dxfui:PredefinedFilter Name="Document" Filter="?p IN ('.DOC','.DOCX','.XLS','.XLSX','.PPT','.PPTX','.PPS','.PPSX','.RTF','.CSV','.PDF')" />
+                    <dxfui:PredefinedFilter Name="Executable" Filter="?p IN ('.EXE','.DLL','.MSI','.COM','.JAR','.BIN','.SCR')" />
+                </dxfui:PredefinedFilterCollection>
+            </dxg:GridColumn.PredefinedFilters>
+        </dxg:GridColumn>
+        <dxg:GridColumn FieldName="ParentName" Header="{Binding ParentName, Source={StaticResource ResourceProvider}}" SortMode="Custom" Visible="False" AllowAutoFilter="False" AllowIncrementalSearch="False" />
+        <dxg:GridColumn FieldName="ParentPath" Header="{Binding ParentPath, Source={StaticResource ResourceProvider}}" SortMode="Custom" Visible="False" AllowAutoFilter="False" AllowIncrementalSearch="False" />
+        <dxg:GridColumn FieldName="FullPath" Header="{Binding Path, Source={StaticResource ResourceProvider}}" SortMode="Custom" Visible="False" AllowAutoFilter="False" AllowIncrementalSearch="False" />
+        <dxg:GridColumn FieldName="Size" Header="{Binding Size, Source={StaticResource ResourceProvider}}" SortMode="Custom" AllowAutoFilter="False" AllowIncrementalSearch="False"
+                        CellTemplateSelector="{StaticResource FileSizeTemplateSelector}">
+            <dxg:GridColumn.EditSettings>
+                <dxe:TextEditSettings DisplayTextConverter="{common:IntToFileSizeConverter}"/>
+            </dxg:GridColumn.EditSettings>
+            <dxg:GridColumn.PredefinedFilters>
+                <dxfui:PredefinedFilterCollection>
+                    <dxfui:PredefinedFilter Name="Empty (0 KB)" Filter="?p = 0" />
+                    <dxfui:PredefinedFilter Name="Tiny (0 - 16 KB)" Filter="?p > 0 AND ?p &lt; 16384" />
+                    <dxfui:PredefinedFilter Name="Small (16 KB - 1 MB)" Filter="?p >= 16384 AND ?p &lt; 1048576" />
+                    <dxfui:PredefinedFilter Name="Medium (1 - 128 MB)" Filter="?p >= 1048576 AND ?p &lt; 134217728" />
+                    <dxfui:PredefinedFilter Name="Large (128 MB - 1 GB)" Filter="?p >= 134217728 AND ?p &lt; 1073741824" />
+                    <dxfui:PredefinedFilter Name="Huge (1 - 4 GB)" Filter="?p >= 1073741824 AND ?p &lt; 4294967296" />
+                    <dxfui:PredefinedFilter Name="Gigantic (> 4 GB)" Filter="?p >= 4294967296" />
+                </dxfui:PredefinedFilterCollection>
+            </dxg:GridColumn.PredefinedFilters>
+        </dxg:GridColumn>
+        <dxg:GridColumn FieldName="DateCreated" Header="{Binding DateCreated, Source={StaticResource ResourceProvider}}" SortMode="Custom" AllowAutoFilter="False" AllowIncrementalSearch="False">
+            <dxg:GridColumn.EditSettings>
+                <dxe:TextEditSettings DisplayFormat="{Binding DateTimeFormatString, Mode=TwoWay, Source={x:Static settings:Settings.Default}}" />
+            </dxg:GridColumn.EditSettings>
+        </dxg:GridColumn>
+        <dxg:GridColumn FieldName="DateModified" Header="{Binding DateModified, Source={StaticResource ResourceProvider}}" SortMode="Custom" AllowAutoFilter="False" AllowIncrementalSearch="False">
+            <dxg:GridColumn.EditSettings>
+                <dxe:TextEditSettings DisplayFormat="{Binding DateTimeFormatString, Mode=TwoWay, Source={x:Static settings:Settings.Default}}" />
+            </dxg:GridColumn.EditSettings>
+        </dxg:GridColumn>
+        <dxg:GridColumn FieldName="DateAccessed" Header="{Binding DateAccessed, Source={StaticResource ResourceProvider}}" SortMode="Custom" Visible="False" AllowAutoFilter="False" AllowIncrementalSearch="False">
+            <dxg:GridColumn.EditSettings>
+                <dxe:TextEditSettings DisplayFormat="{Binding DateTimeFormatString, Mode=TwoWay, Source={x:Static settings:Settings.Default}}" />
+            </dxg:GridColumn.EditSettings>
+        </dxg:GridColumn>
+        <dxg:GridColumn FieldName="Width" Header="{Binding FrameWidth, Source={StaticResource ResourceProvider}}" Visible="False" AllowAutoFilter="False" AllowIncrementalSearch="False" Tag="StartNewGroup" />
+        <dxg:GridColumn FieldName="Height" Header="{Binding FrameHeight, Source={StaticResource ResourceProvider}}" Visible="False" AllowAutoFilter="False" AllowIncrementalSearch="False" />
+        <dxg:GridColumn FieldName="Duration" Header="{Binding Duration, Source={StaticResource ResourceProvider}}" Visible="False" AllowAutoFilter="False" AllowIncrementalSearch="False">
+            <dxg:GridColumn.EditSettings>
+                <dxe:TextEditSettings DisplayFormat="{}{0:hh\:mm\:ss}" />
+            </dxg:GridColumn.EditSettings>
+        </dxg:GridColumn>
+        <dxg:GridColumn FieldName="AudioBitrate" Header="{Binding AudioBitrate, Source={StaticResource ResourceProvider}}" Visible="False" AllowAutoFilter="False" AllowIncrementalSearch="False" Tag="StartNewGroup">
+            <dxg:GridColumn.EditSettings>
+                <dxe:TextEditSettings DisplayFormat="{}{0} kbps" />
+            </dxg:GridColumn.EditSettings>
+        </dxg:GridColumn>
+        <dxg:GridColumn FieldName="AudioChannels" Header="{Binding AudioChannels, Source={StaticResource ResourceProvider}}" Visible="False" AllowAutoFilter="False" AllowIncrementalSearch="False" />
+        <dxg:GridColumn FieldName="AudioSampleRate" Header="{Binding AudioSampleRate, Source={StaticResource ResourceProvider}}" Visible="False" AllowAutoFilter="False" AllowIncrementalSearch="False">
+            <dxg:GridColumn.EditSettings>
+                <dxe:TextEditSettings DisplayFormat="{}{0:N0} Hz" />
+            </dxg:GridColumn.EditSettings>
+        </dxg:GridColumn>
+        <dxg:GridColumn FieldName="Album" Header="{Binding Album, Source={StaticResource ResourceProvider}}" Visible="False" AllowIncrementalSearch="False" AutoFilterCriteria="Contains" ShowCriteriaInAutoFilterRow="True" Tag="StartNewGroup" />
+        <dxg:GridColumn FieldName="Title" Header="{Binding Title, Source={StaticResource ResourceProvider}}" Visible="False" AllowIncrementalSearch="False" AutoFilterCriteria="Contains" ShowCriteriaInAutoFilterRow="True" />
+        <dxg:GridColumn FieldName="Genre" Header="{Binding Genre, Source={StaticResource ResourceProvider}}" Visible="False" AllowIncrementalSearch="False" AutoFilterCriteria="Contains" ShowCriteriaInAutoFilterRow="True" />
+        <dxg:GridColumn FieldName="AlbumArtists" Header="{Binding AlbumArtists, Source={StaticResource ResourceProvider}}" Visible="False" AllowIncrementalSearch="False" AutoFilterCriteria="Contains" ShowCriteriaInAutoFilterRow="True" />
+        <dxg:GridColumn FieldName="ContributingArtists" Header="{Binding ContributingArtists, Source={StaticResource ResourceProvider}}" Visible="False" AllowIncrementalSearch="False" AutoFilterCriteria="Contains" ShowCriteriaInAutoFilterRow="True" />
+        <dxg:GridColumn FieldName="Composers" Header="{Binding Composers, Source={StaticResource ResourceProvider}}" Visible="False" AllowIncrementalSearch="False" AutoFilterCriteria="Contains" ShowCriteriaInAutoFilterRow="True" />
+        <dxg:GridColumn FieldName="Year" Header="{Binding Year, Source={StaticResource ResourceProvider}}" Visible="False" AllowAutoFilter="False" AllowIncrementalSearch="False" />
+        <dxg:GridColumn FieldName="Track" Header="{Binding Track, Source={StaticResource ResourceProvider}}" Visible="False" AllowAutoFilter="False" AllowIncrementalSearch="False" />
+        <dxg:GridColumn FieldName="TrackCount" Header="{Binding TrackCount, Source={StaticResource ResourceProvider}}" Visible="False" AllowAutoFilter="False" AllowIncrementalSearch="False" />
+        <dxg:GridColumn FieldName="DateDeleted" Header="{Binding DateDeleted, Source={StaticResource ResourceProvider}}" Visible="False" ShowInColumnChooser="False" AllowAutoFilter="False" AllowIncrementalSearch="False">
+            <dxg:GridColumn.EditSettings>
+                <dxe:TextEditSettings DisplayFormat="{Binding DateTimeFormatString, Mode=TwoWay, Source={x:Static settings:Settings.Default}}" />
+            </dxg:GridColumn.EditSettings>
+        </dxg:GridColumn>
+        <dxg:GridColumn FieldName="OriginalLocation" Header="{Binding OriginalLocation, Source={StaticResource ResourceProvider}}" Visible="False" ShowInColumnChooser="False" AllowAutoFilter="False" AllowIncrementalSearch="False" />
+    </dxg:GridControl.Columns>
+
+    <dxg:GridControl.GroupSummary>
+        <dxg:GridSummaryItem SummaryType="Count" DisplayFormat="{Binding TotalFormat, Source={StaticResource ResourceProvider}}" />
+    </dxg:GridControl.GroupSummary>
+
+    <dxg:GridControl.TotalSummary>
+        <dxg:GridSummaryItem FieldName="Name" SummaryType="Count" Alignment="Left" DisplayFormat="{Binding TotalFormat, Source={StaticResource ResourceProvider}}" />
+        <dxg:GridSummaryItem FieldName="Name" SummaryType="Count" Alignment="Left" DisplayFormat="{Binding SelectedFromat, Source={StaticResource ResourceProvider}}" CalculationMode="SelectedRows" />
+    </dxg:GridControl.TotalSummary>
+
+    <dxb:BarManager.DXContextMenu>
+        <dxb:PopupMenu>
+            <dxmvvm:Interaction.Behaviors>
+                <common:CustomMenuBehavior CommandParameter="{Binding SelectedItems, RelativeSource={RelativeSource AncestorType=dxg:GridControl}}"
+                                           DefaultCommandParameter="{Binding CurrentFolder}" IsVisible="{Binding CurrentFolder.IsRecycleBin, Converter={dxmvvm:BooleanNegationConverter}}" />
+            </dxmvvm:Interaction.Behaviors>
+            <dxb:PopupMenu.Items>
+                <dxb:BarLinkContainerItem IsVisible="{Binding CurrentFolder.IsRecycleBin, Converter={dxmvvm:BooleanNegationConverter}}">
+                    <dxb:BarLinkContainerItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="AddRemoveMenuItems" />
+                        <dxb:BarItemLinkSeparator />
+                        <dxb:BarSubItemLink BarItemName="ExpandToLevel" />
+                        <dxb:BarSubItemLink BarItemName="Selection" />
+                        <dxb:BarItemLinkSeparator />
+                        <dxb:BarButtonItemLink BarItemName="PinToQuickAccess" />
+                        <dxb:BarButtonItemLink BarItemName="UnpinFromQuickAccess" />
+                        <dxb:BarButtonItemLink BarItemName="Copy" />
+                        <dxb:BarButtonItemLink BarItemName="Paste" />
+                        <dxb:BarButtonItemLink BarItemName="Cut" />
+                        <dxb:BarButtonItemLink BarItemName="CopyPath" />
+                        <dxb:BarItemLinkSeparator />
+                        <dxb:BarSubItemLink BarItemName="MoveTo" />
+                        <dxb:BarSubItemLink BarItemName="CopyTo" />
+                        <dxb:BarSplitButtonItemLink BarItemName="Delete" />
+                        <dxb:BarButtonItemLink BarItemName="Rename" />
+                        <dxb:BarItemLinkSeparator />
+                        <dxb:BarButtonItemLink BarItemName="NewFolder" />
+                        <dxb:BarButtonItemLink BarItemName="NewFile" />
+                        <dxb:BarButtonItemLink BarItemName="Mail" />
+                        <dxb:BarButtonItemLink BarItemName="Zip" />
+                        <dxb:BarButtonItemLink BarItemName="Unzip" />
+                        <dxb:BarItemLinkSeparator />
+                        <dxb:BarButtonItemLink BarItemName="Open" />
+                        <dxb:BarButtonItemLink BarItemName="OpenInNewTab" />
+                        <dxb:BarButtonItemLink BarItemName="OpenInNewWindow" />
+                        <dxb:BarButtonItemLink BarItemName="Properties" />
+                        <dxb:BarItemLinkSeparator />
+                        <dxb:BarButtonItemLink BarItemName="OpenContainingFolder" IsVisible="{Binding HighlightedText, Converter={dxmvvm:StringToBooleanConverter}}" />
+                    </dxb:BarLinkContainerItem.ItemLinks>
+                </dxb:BarLinkContainerItem>
+                <dxb:BarLinkContainerItem IsVisible="{Binding CurrentFolder.IsRecycleBin}">
+                    <dxb:BarLinkContainerItem.ItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="EmptyRecycleBin" />
+                        <dxb:BarButtonItemLink BarItemName="RecycleBinProperties" />
+                        <dxb:BarItemLinkSeparator />
+                        <dxb:BarButtonItemLink BarItemName="RestoreAll" />
+                        <dxb:BarButtonItemLink BarItemName="Restore" />
+                        <dxb:BarItemLinkSeparator />
+                        <dxb:BarButtonItemLink BarItemName="PermanentlyDelete" />
+                    </dxb:BarLinkContainerItem.ItemLinks>
+                </dxb:BarLinkContainerItem>
+            </dxb:PopupMenu.Items>
+        </dxb:PopupMenu>
+    </dxb:BarManager.DXContextMenu>
+
+</dxg:GridControl>

@@ -1,0 +1,1156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddColumn" xml:space="preserve">
+    <value>Sütun Ekle</value>
+  </data>
+  <data name="AddRemoveMenuItems" xml:space="preserve">
+    <value>Menü Öğelerini Ekle / Kaldır</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Uygulama</value>
+  </data>
+  <data name="ApplicationError" xml:space="preserve">
+    <value>Uygulama Hatası</value>
+  </data>
+  <data name="ApplicationErrorOccured" xml:space="preserve">
+    <value>Bir uygulama hatası oluştu.</value>
+  </data>
+  <data name="BackToDefault" xml:space="preserve">
+    <value>Varsayılana Dön</value>
+  </data>
+  <data name="Backward" xml:space="preserve">
+    <value>Geri '{0}'</value>
+  </data>
+  <data name="BestFitAllColumns" xml:space="preserve">
+    <value>Tüm Sütunlara En Uygun</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>İptal</value>
+  </data>
+  <data name="Clipboard" xml:space="preserve">
+    <value>Pano</value>
+  </data>
+  <data name="ConfirmCopy" xml:space="preserve">
+    <value>Kopyalamayı Onayla</value>
+  </data>
+  <data name="ConfirmCopyMessage" xml:space="preserve">
+    <value>'{0}' öğesini '{1}' konumuna kopyalamak istiyor musunuz?</value>
+  </data>
+  <data name="ConfirmMove" xml:space="preserve">
+    <value>Taşımayı Onayla</value>
+  </data>
+  <data name="ConfirmMoveMessage" xml:space="preserve">
+    <value>'{0}' öğesini '{1}' konumuna taşımak istiyor musunuz?</value>
+  </data>
+  <data name="ConfirmMultipleCopy" xml:space="preserve">
+    <value>Seçili nesneleri '{0}' konumuna kopyalamak istiyor musunuz?</value>
+  </data>
+  <data name="ConfirmMultipleMove" xml:space="preserve">
+    <value>Seçili nesneleri '{0}' konumuna taşımak istiyor musunuz?</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Kopyala</value>
+  </data>
+  <data name="CopyPath" xml:space="preserve">
+    <value>Yolu Kopyala</value>
+  </data>
+  <data name="CopyTo" xml:space="preserve">
+    <value>Kopyalama Hedefi</value>
+  </data>
+  <data name="CustomColumn" xml:space="preserve">
+    <value>Özel Sütun</value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>Kes</value>
+  </data>
+  <data name="DateAccessed" xml:space="preserve">
+    <value>Erişim Tarihi</value>
+  </data>
+  <data name="DateCreated" xml:space="preserve">
+    <value>Oluşturulma Tarihi</value>
+  </data>
+  <data name="DateModified" xml:space="preserve">
+    <value>Değiştirilme Tarihi</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Sil</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Detaylar</value>
+  </data>
+  <data name="DetailsPane" xml:space="preserve">
+    <value>Ayrıntılar Bölmesi</value>
+  </data>
+  <data name="DuplicateFileName" xml:space="preserve">
+    <value>Yinelenen Dosya Adı</value>
+  </data>
+  <data name="DuplicateFileNameMessage" xml:space="preserve">
+    <value>Bazı isimler birden fazla dosyaya atandı.</value>
+  </data>
+  <data name="EditCustomColumn" xml:space="preserve">
+    <value>Özel Sütunu Düzenle</value>
+  </data>
+  <data name="EmptyFiles" xml:space="preserve">
+    <value>Klasörler ve Boş Dosyalar</value>
+  </data>
+  <data name="Extension" xml:space="preserve">
+    <value>Uzantı</value>
+  </data>
+  <data name="ExtensionFilter" xml:space="preserve">
+    <value>Uzantı Filtresi</value>
+  </data>
+  <data name="ExtraLargeIcons" xml:space="preserve">
+    <value>Çok Büyük Simgeler</value>
+  </data>
+  <data name="Forward" xml:space="preserve">
+    <value>İleri '{0}'</value>
+  </data>
+  <data name="GroupBy" xml:space="preserve">
+    <value>Grupla</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Giriş</value>
+  </data>
+  <data name="InvalidFileName" xml:space="preserve">
+    <value>Geçersiz Dosya Adı</value>
+  </data>
+  <data name="InvalidFileNameMessage" xml:space="preserve">
+    <value>Dosya adı boş olamaz veya şu karakterlerden herhangi birini içeremez: \ / : * ? " &lt; &gt; |</value>
+  </data>
+  <data name="InvertSelection" xml:space="preserve">
+    <value>Diğerlerini Seç</value>
+  </data>
+  <data name="LargeIcons" xml:space="preserve">
+    <value>Büyük Simgeler</value>
+  </data>
+  <data name="Layout" xml:space="preserve">
+    <value>Düzen</value>
+  </data>
+  <data name="List" xml:space="preserve">
+    <value>Liste</value>
+  </data>
+  <data name="LoadLayout" xml:space="preserve">
+    <value>Düzen Yükle</value>
+  </data>
+  <data name="Mail" xml:space="preserve">
+    <value>Posta</value>
+  </data>
+  <data name="MediumIcons" xml:space="preserve">
+    <value>Orta Boy Simgeler</value>
+  </data>
+  <data name="MoveTo" xml:space="preserve">
+    <value>Taşıma Hedefi</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>İsim</value>
+  </data>
+  <data name="NavigationPane" xml:space="preserve">
+    <value>Gezinti Bölmesi</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Yeni</value>
+  </data>
+  <data name="NewFile" xml:space="preserve">
+    <value>Yeni Dosya</value>
+  </data>
+  <data name="NewFolder" xml:space="preserve">
+    <value>Yeni Klasör</value>
+  </data>
+  <data name="NewName" xml:space="preserve">
+    <value>Yeni İsim</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Hayır</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>Tamam</value>
+  </data>
+  <data name="Organize" xml:space="preserve">
+    <value>Düzenle</value>
+  </data>
+  <data name="Panes" xml:space="preserve">
+    <value>Bölmeler</value>
+  </data>
+  <data name="Parent" xml:space="preserve">
+    <value>Üst Klasör</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Yapıştır</value>
+  </data>
+  <data name="Path" xml:space="preserve">
+    <value>Yol</value>
+  </data>
+  <data name="Pattern" xml:space="preserve">
+    <value>Desen</value>
+  </data>
+  <data name="PermanentlyDelete" xml:space="preserve">
+    <value>Kalıcı olarak sil</value>
+  </data>
+  <data name="PinToQuickAccess" xml:space="preserve">
+    <value>Hızlı Erişime Sabitle</value>
+  </data>
+  <data name="PreviewPane" xml:space="preserve">
+    <value>Önizleme Bölmesi</value>
+  </data>
+  <data name="PrintPreview" xml:space="preserve">
+    <value>Baskı Önizleme</value>
+  </data>
+  <data name="Properties" xml:space="preserve">
+    <value>Özellikler</value>
+  </data>
+  <data name="Recycle" xml:space="preserve">
+    <value>Geri Dönüşüm Kutusu'na gönder</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Yenile</value>
+  </data>
+  <data name="RemoveCustomColumn" xml:space="preserve">
+    <value>Özel Sütunu Kaldır</value>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>Yeniden Adlandır</value>
+  </data>
+  <data name="Row" xml:space="preserve">
+    <value>Satır</value>
+  </data>
+  <data name="RowsColumns" xml:space="preserve">
+    <value>Satırlar &amp; Sütunlar</value>
+  </data>
+  <data name="SaveLayout" xml:space="preserve">
+    <value>Düzeni Kaydet</value>
+  </data>
+  <data name="SearchTitle" xml:space="preserve">
+    <value>Ara: {0}</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Seç</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Hepsini Seç</value>
+  </data>
+  <data name="SelectionFilter" xml:space="preserve">
+    <value>Seçim Filtresi</value>
+  </data>
+  <data name="ItemTypeFilter" xml:space="preserve">
+    <value>Öğe Türü Filtresi</value>
+  </data>
+  <data name="SelectNone" xml:space="preserve">
+    <value>Hiçbirini Seçme</value>
+  </data>
+  <data name="ShowCheckBoxes" xml:space="preserve">
+    <value>Onay Kutularını Göster</value>
+  </data>
+  <data name="ShowFileExtensions" xml:space="preserve">
+    <value>Dosya Uzantılarını Göster</value>
+  </data>
+  <data name="ShowHiddenItems" xml:space="preserve">
+    <value>Gizli Öğeleri Göster</value>
+  </data>
+  <data name="ShowHide" xml:space="preserve">
+    <value>Göster / Gizle</value>
+  </data>
+  <data name="ShowRowNumbers" xml:space="preserve">
+    <value>Satır Numaralarını Göster</value>
+  </data>
+  <data name="ShowSystemItems" xml:space="preserve">
+    <value>Sistem Öğelerini Göster</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Boyut</value>
+  </data>
+  <data name="SmallIcons" xml:space="preserve">
+    <value>Küçük Simgeler</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Sırala</value>
+  </data>
+  <data name="StandardThemes" xml:space="preserve">
+    <value>Standart Temalar</value>
+  </data>
+  <data name="Themes" xml:space="preserve">
+    <value>Temalar</value>
+  </data>
+  <data name="TotalFormat" xml:space="preserve">
+    <value>Toplam: {0}</value>
+  </data>
+  <data name="TouchThemes" xml:space="preserve">
+    <value>Dokunmatik Temalar</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Tür</value>
+  </data>
+  <data name="UnpinFromQuickAccess" xml:space="preserve">
+    <value>Hızlı Erişimden Kaldır</value>
+  </data>
+  <data name="Up" xml:space="preserve">
+    <value>Yukarı '{0}'</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Görünüm</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Evet</value>
+  </data>
+  <data name="Zip" xml:space="preserve">
+    <value>Sıkıştır</value>
+  </data>
+  <data name="GroupName" xml:space="preserve">
+    <value>Grup İsmi</value>
+  </data>
+  <data name="NewMenuItem" xml:space="preserve">
+    <value>Yeni Menü Öğesi</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Düzenle</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Parola</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Kapat</value>
+  </data>
+  <data name="Progress" xml:space="preserve">
+    <value>İlerleme</value>
+  </data>
+  <data name="Unzip" xml:space="preserve">
+    <value>Arşivi Aç</value>
+  </data>
+  <data name="CompressedSize" xml:space="preserve">
+    <value>Sıkıştırılmış Boyut</value>
+  </data>
+  <data name="UncompressedSize" xml:space="preserve">
+    <value>Sıkıştırılmamış Boyut</value>
+  </data>
+  <data name="WrongPassword" xml:space="preserve">
+    <value>Yanlış Şifre</value>
+  </data>
+  <data name="WrongPasswordMessage" xml:space="preserve">
+    <value>Girilen şifre yanlış. Bu dosyayı atlamak ister misiniz?</value>
+  </data>
+  <data name="OpenContainingFolder" xml:space="preserve">
+    <value>Dosyayı içeren klasörü aç</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Seçenekler</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>Genel</value>
+  </data>
+  <data name="NewTab" xml:space="preserve">
+    <value>Yeni Sekme</value>
+  </data>
+  <data name="CopyMove" xml:space="preserve">
+    <value>Kopyala &amp; Taşı</value>
+  </data>
+  <data name="CopyWindows" xml:space="preserve">
+    <value>Kopyala (Windows Standardı)</value>
+  </data>
+  <data name="DragDrop" xml:space="preserve">
+    <value>Sürükle &amp; Bırak</value>
+  </data>
+  <data name="DragDropDifferentDrive" xml:space="preserve">
+    <value>Farklı Sürücüye Sürükle &amp; Bırak</value>
+  </data>
+  <data name="DragDropSameDrive" xml:space="preserve">
+    <value>Aynı Sürücüye Sürükle &amp; Bırak</value>
+  </data>
+  <data name="Move" xml:space="preserve">
+    <value>Taşı</value>
+  </data>
+  <data name="MoveWindows" xml:space="preserve">
+    <value>Taşı (Windows Standardı)</value>
+  </data>
+  <data name="Advanced" xml:space="preserve">
+    <value>Gelişmiş</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>Dosya</value>
+  </data>
+  <data name="FolderNotFound" xml:space="preserve">
+    <value>Windows belirtilen klasörü bulamıyor. Yazımı kontrol edin ve tekrar deneyin.</value>
+  </data>
+  <data name="LowerCase" xml:space="preserve">
+    <value>Tümü Küçük Harf</value>
+  </data>
+  <data name="Multiple" xml:space="preserve">
+    <value>Çoklu</value>
+  </data>
+  <data name="SentenceCase" xml:space="preserve">
+    <value>Cümle Düzeni</value>
+  </data>
+  <data name="TitleCase" xml:space="preserve">
+    <value>İlk Harfler Büyük</value>
+  </data>
+  <data name="ToggleCase" xml:space="preserve">
+    <value>Büyük / Küçük Harf Değiştir</value>
+  </data>
+  <data name="UpperCase" xml:space="preserve">
+    <value>Tümü Büyük Harf</value>
+  </data>
+  <data name="ColumnName" xml:space="preserve">
+    <value>Sütun Adı</value>
+  </data>
+  <data name="ColumnType" xml:space="preserve">
+    <value>Sütun Tipi</value>
+  </data>
+  <data name="Expression" xml:space="preserve">
+    <value>İfade</value>
+  </data>
+  <data name="CustomMenuItems" xml:space="preserve">
+    <value>Özel Menü Öğeleri</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Yok</value>
+  </data>
+  <data name="Single" xml:space="preserve">
+    <value>Tekli</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filtrele</value>
+  </data>
+  <data name="AllSubfolders" xml:space="preserve">
+    <value>Tüm Alt Klasörler</value>
+  </data>
+  <data name="CurrentFolder" xml:space="preserve">
+    <value>Geçerli Klasör</value>
+  </data>
+  <data name="SearchFilter" xml:space="preserve">
+    <value>Ara &amp; Filtrele</value>
+  </data>
+  <data name="SearchTools" xml:space="preserve">
+    <value>Arama Araçları</value>
+  </data>
+  <data name="CopyAllColumns" xml:space="preserve">
+    <value>Panoya Kopyala (tüm sütunlar)</value>
+  </data>
+  <data name="CopyThisColumn" xml:space="preserve">
+    <value>Panoya Kopyala (bu sütun)</value>
+  </data>
+  <data name="ShowColumnChooser" xml:space="preserve">
+    <value>Sütun Seçiciyi Göster</value>
+  </data>
+  <data name="AddCustomColumn" xml:space="preserve">
+    <value>Özel Sütun Ekle</value>
+  </data>
+  <data name="LayoutLoadError" xml:space="preserve">
+    <value>Düzen Yükleme Hatası</value>
+  </data>
+  <data name="LayoutLoadErrorOccured" xml:space="preserve">
+    <value>Düzen yüklenirken bir hata oluştu. Varsayılan düzene geri dönüldü.</value>
+  </data>
+  <data name="Customizations" xml:space="preserve">
+    <value>Özelleştirmeler</value>
+  </data>
+  <data name="Folder" xml:space="preserve">
+    <value>Klasör</value>
+  </data>
+  <data name="LoadDefaultLayout" xml:space="preserve">
+    <value>Varsayılan Düzeni Yükle</value>
+  </data>
+  <data name="ManageSavedLayouts" xml:space="preserve">
+    <value>Kaydedilen Düzenleri Yönet</value>
+  </data>
+  <data name="Shortcut" xml:space="preserve">
+    <value>Kısayol</value>
+  </data>
+  <data name="LayoutSaved" xml:space="preserve">
+    <value>Düzen Kaydedildi</value>
+  </data>
+  <data name="LayoutSaveSuccessful" xml:space="preserve">
+    <value>Düzen başarıyla kaydedildi.</value>
+  </data>
+  <data name="RecentLocations" xml:space="preserve">
+    <value>Son Konumlar</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Konum</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Aç</value>
+  </data>
+  <data name="OpenInNewTab" xml:space="preserve">
+    <value>Yeni Sekmede Aç</value>
+  </data>
+  <data name="OpenInNewWindow" xml:space="preserve">
+    <value>Yeni Pencerede Aç</value>
+  </data>
+  <data name="ManageExpressions" xml:space="preserve">
+    <value>İfadeleri Yönet</value>
+  </data>
+  <data name="OpenWithApplication" xml:space="preserve">
+    <value>Uygulama ile Aç</value>
+  </data>
+  <data name="Command" xml:space="preserve">
+    <value>Komut</value>
+  </data>
+  <data name="Parameter" xml:space="preserve">
+    <value>Parametre</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Çıkış</value>
+  </data>
+  <data name="AddToStartup" xml:space="preserve">
+    <value>Başlangıca Ekle</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Dil</value>
+  </data>
+  <data name="Computer" xml:space="preserve">
+    <value>Bilgisayar</value>
+  </data>
+  <data name="QuickAccess" xml:space="preserve">
+    <value>Hızlı Erişim</value>
+  </data>
+  <data name="ClearSorting" xml:space="preserve">
+    <value>Sıralamayı Temizle</value>
+  </data>
+  <data name="ParentName" xml:space="preserve">
+    <value>Üst Klasör Adı</value>
+  </data>
+  <data name="ParentPath" xml:space="preserve">
+    <value>Üst Klasör Yolu</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>Ağ</value>
+  </data>
+  <data name="ExpandToOpenFolder" xml:space="preserve">
+    <value>Açık Klasörü Genişlet</value>
+  </data>
+  <data name="ShowNavigationPane" xml:space="preserve">
+    <value>Gezinti Bölmesi'ni Göster</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>İçerik</value>
+  </data>
+  <data name="StaticTaskbarIcon" xml:space="preserve">
+    <value>Statik Görev Çubuğu Simgesi</value>
+  </data>
+  <data name="StaticTaskbarTitle" xml:space="preserve">
+    <value>Statik Görev Çubuğu Başlığı</value>
+  </data>
+  <data name="NoPreviewAvailable" xml:space="preserve">
+    <value>Bu dosya türü için kayıtlı önizleme uzantısı bulunamadı</value>
+  </data>
+  <data name="Extensions" xml:space="preserve">
+    <value>Eklentiler</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Sürüm</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Devredışı</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Hata</value>
+  </data>
+  <data name="Preferred" xml:space="preserve">
+    <value>Öncelikli</value>
+  </data>
+  <data name="ExtensionError" xml:space="preserve">
+    <value>Bu uzantı bir hata içeriyor ve etkinleştirilemez. Daha fazla bilgi için hata ayrıntılarına bakın.</value>
+  </data>
+  <data name="ErrorDetails" xml:space="preserve">
+    <value>Hata Detayları</value>
+  </data>
+  <data name="FileFormatError" xml:space="preserve">
+    <value>Dosya biçimi yanlış veya dosya bozulmuş</value>
+  </data>
+  <data name="UnifiedSorting" xml:space="preserve">
+    <value>Birleşik Sıralama</value>
+  </data>
+  <data name="Virtualization" xml:space="preserve">
+    <value>Sanallaştırma</value>
+  </data>
+  <data name="SupportedFileTypes" xml:space="preserve">
+    <value>Desteklenen Dosya Türleri</value>
+  </data>
+  <data name="AskBeforeDownloadingUpdates" xml:space="preserve">
+    <value>Güncellemeleri İndirmeden Önce Sor</value>
+  </data>
+  <data name="CheckForUpdates" xml:space="preserve">
+    <value>Başlangıçta Güncellemeleri Kontrol Et</value>
+  </data>
+  <data name="DownloadUpdatesAutomatically" xml:space="preserve">
+    <value>Güncellemeleri Otomatik İndir</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>Uygulamanın yeni bir sürümü mevcut</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Güncelle</value>
+  </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Yeniden Başlat</value>
+  </data>
+  <data name="RestartRequired" xml:space="preserve">
+    <value>Uygulamanın yeni bir sürümü indirildi ve kurulumun tamamlanması için yeniden başlatma gerekiyor</value>
+  </data>
+  <data name="DownloadInProgress" xml:space="preserve">
+    <value>Uygulamanın yeni sürümü indiriliyor</value>
+  </data>
+  <data name="RestartConfirmation" xml:space="preserve">
+    <value>Uygulamanın yeni bir sürümü indirildi ve kurulumun tamamlanması için yeniden başlatma gerekiyor. Şimdi yeniden başlatmak istiyor musunuz?</value>
+  </data>
+  <data name="UpdateConfirmation" xml:space="preserve">
+    <value>Uygulamanın yeni bir sürümü mevcut. İndirip kurmak ister misiniz?</value>
+  </data>
+  <data name="DownloadUpdates" xml:space="preserve">
+    <value>Güncellemeleri İndir</value>
+  </data>
+  <data name="NoUpdateAvailable" xml:space="preserve">
+    <value>Şu anda indirilebilir güncelleme yok</value>
+  </data>
+  <data name="DateTimeFormat" xml:space="preserve">
+    <value>Tarih ve Saat Formatı</value>
+  </data>
+  <data name="SaveSession" xml:space="preserve">
+    <value>Kapatırken Oturumu Kaydet</value>
+  </data>
+  <data name="DefaultSearch" xml:space="preserve">
+    <value>Varsayılan Arama</value>
+  </data>
+  <data name="SearchWithEverything" xml:space="preserve">
+    <value>Everything ile Ara</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Arama</value>
+  </data>
+  <data name="HelpSearchWithEverything" xml:space="preserve">
+    <value>Everything, dosya ve klasörleri isme göre hızla bulabilen, Windows için ücretsiz bir masaüstü arama programıdır.
+Bu seçeneğin aktif olabilmesi için Everything (kurulan veya taşınabilir sürüm) çalışır durumda olmalıdır.</value>
+  </data>
+  <data name="HelpAddToStartup" xml:space="preserve">
+    <value>FileExplorer Windows başlangıcına eklenir ve böylece uygulamanın çok daha hızlı başlatılması sağlanır.</value>
+  </data>
+  <data name="HelpSaveSession" xml:space="preserve">
+    <value>Açık pencereler ve sekmeler, uygulama kapatıldığında kaydedilir ve bir sonraki açılışta tümü geri yüklenir.</value>
+  </data>
+  <data name="HelpStaticTaskbarIcon" xml:space="preserve">
+    <value>Varsayılan olarak geçerli klasörün simgesi görev çubuğunda gösterilir.
+Statik bir simge göstermek için bu seçeneği etkinleştirin.</value>
+  </data>
+  <data name="HelpStaticTaskbarTitle" xml:space="preserve">
+    <value>Varsayılan olarak geçerli klasörün ismi görev çubuğunda gösterilir.
+Statik bir isim göstermek için bu seçeneği etkinleştirin.</value>
+  </data>
+  <data name="HelpUnifiedSorting" xml:space="preserve">
+    <value>Sıralama sütunundan bağımsız olarak, FileExplorer her zaman önce klasörleri, sonra dosyaları sıralar.
+Hepsini bir arada sıralamak için bu seçeneği etkinleştirin.</value>
+  </data>
+  <data name="HelpVirtualization" xml:space="preserve">
+    <value>Sanallaştırma, çok sayıda dosya veya klasör içeren klasörlerin içeriğini görüntülerken performansı artırır.
+Kaydırma sırasında, dosyalar ve klasörler arka planda yüklenirken bulanıklaştırma efekti gösterilir.</value>
+  </data>
+  <data name="Expand" xml:space="preserve">
+    <value>Genişlet</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>Seviye</value>
+  </data>
+  <data name="SelectedFromat" xml:space="preserve">
+    <value>Seçili: {0}</value>
+  </data>
+  <data name="FrameWidth" xml:space="preserve">
+    <value>Resim/Video Genişliği</value>
+  </data>
+  <data name="FrameHeight" xml:space="preserve">
+    <value>Resim/Video Yüksekliği</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Süre</value>
+  </data>
+  <data name="AudioBitrate" xml:space="preserve">
+    <value>Ses Bit Hızı</value>
+  </data>
+  <data name="AudioChannels" xml:space="preserve">
+    <value>Ses Kanalları</value>
+  </data>
+  <data name="AudioSampleRate" xml:space="preserve">
+    <value>Ses Örnekleme Oranı</value>
+  </data>
+  <data name="Album" xml:space="preserve">
+    <value>Albüm</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Başlık</value>
+  </data>
+  <data name="Genre" xml:space="preserve">
+    <value>Tür</value>
+  </data>
+  <data name="AlbumArtists" xml:space="preserve">
+    <value>Albüm Sanatçıları</value>
+  </data>
+  <data name="ContributingArtists" xml:space="preserve">
+    <value>Katkıda Bulunan Sanatçılar</value>
+  </data>
+  <data name="Composers" xml:space="preserve">
+    <value>Besteciler</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Yıl</value>
+  </data>
+  <data name="Track" xml:space="preserve">
+    <value>Parça</value>
+  </data>
+  <data name="TrackCount" xml:space="preserve">
+    <value>Parça Sayısı</value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>Genişlik</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Yükseklik</value>
+  </data>
+  <data name="Thumbnails" xml:space="preserve">
+    <value>Küçük Resimler</value>
+  </data>
+  <data name="Mode" xml:space="preserve">
+    <value>Mod</value>
+  </data>
+  <data name="Focus" xml:space="preserve">
+    <value>Odak</value>
+  </data>
+  <data name="Crop" xml:space="preserve">
+    <value>Kırp</value>
+  </data>
+  <data name="Stretch" xml:space="preserve">
+    <value>Uzat</value>
+  </data>
+  <data name="Contain" xml:space="preserve">
+    <value>Kapsa</value>
+  </data>
+  <data name="CropDescription" xml:space="preserve">
+    <value>En boy oranını korumak için gerekirse resmi kırp</value>
+  </data>
+  <data name="ContainDescription" xml:space="preserve">
+    <value>En boy oranını korumak için gerekirse çıktı boyutlarından birini küçült</value>
+  </data>
+  <data name="StretchDescription" xml:space="preserve">
+    <value>Çıktı boyutlarını doldurmak için gerekirse resmi bir eksende uzat</value>
+  </data>
+  <data name="Top" xml:space="preserve">
+    <value>Üst</value>
+  </data>
+  <data name="Bottom" xml:space="preserve">
+    <value>Alt</value>
+  </data>
+  <data name="Left" xml:space="preserve">
+    <value>Sol</value>
+  </data>
+  <data name="Right" xml:space="preserve">
+    <value>Sağ</value>
+  </data>
+  <data name="Center" xml:space="preserve">
+    <value>Merkez</value>
+  </data>
+  <data name="TopLeft" xml:space="preserve">
+    <value>Sol Üst</value>
+  </data>
+  <data name="TopRight" xml:space="preserve">
+    <value>Sağ Üst</value>
+  </data>
+  <data name="BottomLeft" xml:space="preserve">
+    <value>Sol Alt</value>
+  </data>
+  <data name="BottomRight" xml:space="preserve">
+    <value>Sağ Alt</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Yardım</value>
+  </data>
+  <data name="Prefix" xml:space="preserve">
+    <value>Önek</value>
+  </data>
+  <data name="Suffix" xml:space="preserve">
+    <value>Sonek</value>
+  </data>
+  <data name="ConfirmBeforeRun" xml:space="preserve">
+    <value>Çalıştırmadan Önce Doğrula</value>
+  </data>
+  <data name="WorkingDirectory" xml:space="preserve">
+    <value>Çalışma Dizini</value>
+  </data>
+  <data name="RunCommand" xml:space="preserve">
+    <value>Komut Çalıştır</value>
+  </data>
+  <data name="SaveSelection" xml:space="preserve">
+    <value>Seçimi Kaydet</value>
+  </data>
+  <data name="RestoreSelection" xml:space="preserve">
+    <value>Seçimi Geri Yükle</value>
+  </data>
+  <data name="AutoRestoreSelection" xml:space="preserve">
+    <value>Seçimi Her Zaman Geri Yükle</value>
+  </data>
+  <data name="DateDeleted" xml:space="preserve">
+    <value>Silinme Tarihi</value>
+  </data>
+  <data name="OriginalLocation" xml:space="preserve">
+    <value>Önceki Konum</value>
+  </data>
+  <data name="RecycleBin" xml:space="preserve">
+    <value>Geri Dönüşüm Kutusu</value>
+  </data>
+  <data name="EmptyRecycleBin" xml:space="preserve">
+    <value>Geri Dönüşüm Kutusu'nu Boşalt</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Geri Yükle</value>
+  </data>
+  <data name="RestoreAll" xml:space="preserve">
+    <value>Hepsini Geri Yükle</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Metin</value>
+  </data>
+  <data name="Integer" xml:space="preserve">
+    <value>Tamsayı</value>
+  </data>
+  <data name="Decimal" xml:space="preserve">
+    <value>Ondalık Sayı</value>
+  </data>
+  <data name="DateTime" xml:space="preserve">
+    <value>Tarih &amp; Saat </value>
+  </data>
+  <data name="Boolean" xml:space="preserve">
+    <value>Doğru / Yanlış</value>
+  </data>
+  <data name="Selection" xml:space="preserve">
+    <value>Seçim</value>
+  </data>
+  <data name="RecycleBinProperties" xml:space="preserve">
+    <value>Geri Dönüşüm Kutusu Özellikleri</value>
+  </data>
+  <data name="Manage" xml:space="preserve">
+    <value>Yönet</value>
+  </data>
+  <data name="RestoreSelected" xml:space="preserve">
+    <value>Seçilenleri Geri Yükle</value>
+  </data>
+  <data name="ShowErrors" xml:space="preserve">
+    <value>Hataları Göster</value>
+  </data>
+  <data name="QuickPreview" xml:space="preserve">
+    <value>Hızlı Önizleme</value>
+  </data>
+  <data name="HelpQuickPreview" xml:space="preserve">
+    <value>Seçili dosya türleri için dosya listesinin yanında hafif bir fareyle üzerine gelme önizlemesi gösterir. Yalnızca imlecin üzerindeki dosya yüklenir.</value>
+  </data>
+  <data name="ImageFiles" xml:space="preserve">
+    <value>Görüntü dosyaları</value>
+  </data>
+  <data name="ImagePreviews" xml:space="preserve">
+    <value>Görüntü önizlemeleri</value>
+  </data>
+  <data name="ToolPresets" xml:space="preserve">
+    <value>Yaygın araç şablonları</value>
+  </data>
+  <data name="ToolPresetDescription" xml:space="preserve">
+    <value>Yüklü araçların komutlarını seçin ve özel menüye ekleyin.</value>
+  </data>
+  <data name="ToolPresetAdd" xml:space="preserve">
+    <value>Ekle</value>
+  </data>
+  <data name="ToolPresetTool" xml:space="preserve">
+    <value>Araç</value>
+  </data>
+  <data name="ToolPresetStatus" xml:space="preserve">
+    <value>Durum</value>
+  </data>
+  <data name="ToolPresetArguments" xml:space="preserve">
+    <value>Bağımsız değişkenler</value>
+  </data>
+  <data name="ToolPresetLocate" xml:space="preserve">
+    <value>Konum</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Gözat</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Temizle</value>
+  </data>
+  <data name="AddSelected" xml:space="preserve">
+    <value>Seçilenleri ekle</value>
+  </data>
+  <data name="AddedCountFormat" xml:space="preserve">
+    <value>Eklendi: {0}</value>
+  </data>
+  <data name="ToolPresetStatusAdded" xml:space="preserve">
+    <value>Eklendi</value>
+  </data>
+  <data name="ToolPresetStatusInvalidOverride" xml:space="preserve">
+    <value>Özel yol artık geçerli değil</value>
+  </data>
+  <data name="ToolPresetStatusFound" xml:space="preserve">
+    <value>Bulundu</value>
+  </data>
+  <data name="ToolPresetStatusMissing" xml:space="preserve">
+    <value>Bulunamadı</value>
+  </data>
+  <data name="ToolPresetCannotDuplicate" xml:space="preserve">
+    <value>Şablon öğeleri çoğaltılamaz. Öğeyi silip şablonu yeniden ekleyin.</value>
+  </data>
+  <data name="ToolPresetRawArgumentsWarning" xml:space="preserve">
+    <value>Gelişmiş: Aşağıdaki bağımsız değişkenleri düzenlemek yalnızca bu çalıştırmada yapılandırılmış kaçışı geçersiz kılar.</value>
+  </data>
+  <data name="ToolPresetErrorFormat" xml:space="preserve">
+    <value>Araç komutu kullanılamıyor: {0}</value>
+  </data>
+  <data name="ToolPresetGitBashHere" xml:space="preserve">
+    <value>Git Bash'i burada aç</value>
+  </data>
+  <data name="ToolPresetGitGuiHere" xml:space="preserve">
+    <value>Git GUI'yi burada aç</value>
+  </data>
+  <data name="ToolPresetCommit" xml:space="preserve">
+    <value>Commit</value>
+  </data>
+  <data name="ToolPresetSync" xml:space="preserve">
+    <value>Eşitle</value>
+  </data>
+  <data name="ToolPresetPull" xml:space="preserve">
+    <value>Çek</value>
+  </data>
+  <data name="ToolPresetPush" xml:space="preserve">
+    <value>Gönder</value>
+  </data>
+  <data name="ToolPresetLog" xml:space="preserve">
+    <value>Günlük</value>
+  </data>
+  <data name="ToolPresetDiff" xml:space="preserve">
+    <value>Fark</value>
+  </data>
+  <data name="ToolPresetUpdate" xml:space="preserve">
+    <value>Güncelle</value>
+  </data>
+  <data name="ToolPresetCleanup" xml:space="preserve">
+    <value>Temizle</value>
+  </data>
+  <data name="ToolPresetRepositoryBrowser" xml:space="preserve">
+    <value>Depo tarayıcısı</value>
+  </data>
+  <data name="ToolPresetSevenZipOpen" xml:space="preserve">
+    <value>7-Zip ile aç</value>
+  </data>
+  <data name="ToolPresetExtractHere" xml:space="preserve">
+    <value>Buraya çıkar</value>
+  </data>
+  <data name="ToolPresetExtractFolder" xml:space="preserve">
+    <value>Aynı adlı klasöre çıkar</value>
+  </data>
+  <data name="ToolPresetCompressSevenZip" xml:space="preserve">
+    <value>.7z olarak sıkıştır</value>
+  </data>
+  <data name="ToolPresetErrorUnknownPreset" xml:space="preserve">
+    <value>Bu şablon artık desteklenmiyor. Silip desteklenen bir şablonu yeniden ekleyin.</value>
+  </data>
+  <data name="ToolPresetErrorExecutableMissing" xml:space="preserve">
+    <value>Yapılandırılan araç programı artık mevcut değil. Aracı yeniden bulun.</value>
+  </data>
+  <data name="ToolPresetErrorWrongExecutable" xml:space="preserve">
+    <value>Seçilen program bu araç komutuyla eşleşmiyor.</value>
+  </data>
+  <data name="ToolPresetErrorSelectionRequired" xml:space="preserve">
+    <value>Önce bir dosya veya klasör seçin.</value>
+  </data>
+  <data name="ToolPresetErrorSingleSelectionRequired" xml:space="preserve">
+    <value>Bu komut tam olarak bir seçili öğe gerektirir.</value>
+  </data>
+  <data name="ToolPresetErrorFileRequired" xml:space="preserve">
+    <value>Bu komut yalnızca dosyalar için kullanılabilir.</value>
+  </data>
+  <data name="ToolPresetErrorFolderRequired" xml:space="preserve">
+    <value>Bu komut yalnızca klasörler için kullanılabilir.</value>
+  </data>
+  <data name="ToolPresetErrorUnsupportedArchive" xml:space="preserve">
+    <value>Seçilen dosya desteklenen bir arşiv türü değil.</value>
+  </data>
+  <data name="ToolPresetErrorDifferentParents" xml:space="preserve">
+    <value>Seçilen tüm öğeler aynı klasörde olmalıdır.</value>
+  </data>
+  <data name="ToolPresetErrorWorkingDirectoryMissing" xml:space="preserve">
+    <value>Çalışma klasörü artık kullanılamıyor. Klasörü yenileyip tekrar deneyin.</value>
+  </data>
+  <data name="MenuContext" xml:space="preserve"><value>Menü bağlamı</value></data>
+  <data name="MenuContextLegacy" xml:space="preserve"><value>Uyumluluk (seçim veya arka plan)</value></data>
+  <data name="MenuContextFileSelection" xml:space="preserve"><value>Seçili dosyalar</value></data>
+  <data name="MenuContextDirectorySelection" xml:space="preserve"><value>Seçili klasörler</value></data>
+  <data name="MenuContextDirectoryBackground" xml:space="preserve"><value>Klasör arka planı</value></data>
+  <data name="MenuContextDriveSelection" xml:space="preserve"><value>Seçili sürücüler</value></data>
+  <data name="MenuContextFileSystemSelection" xml:space="preserve"><value>Seçili dosya veya klasörler</value></data>
+  <data name="ShellMenuImport" xml:space="preserve"><value>Gezgin'den içe aktar</value></data>
+  <data name="ShellMenuExtension" xml:space="preserve"><value>Dosya uzantısı</value></data>
+  <data name="ShellMenuAllLevels" xml:space="preserve"><value>Tüm düzeyler</value></data>
+  <data name="ShellMenuScan" xml:space="preserve"><value>Tara</value></data>
+  <data name="ShellMenuScope" xml:space="preserve"><value>Kapsam</value></data>
+  <data name="ShellMenuSource" xml:space="preserve"><value>Kaynak</value></data>
+  <data name="ShellMenuConversionLevel" xml:space="preserve"><value>Dönüştürme düzeyi</value></data>
+  <data name="ShellMenuOriginalCommand" xml:space="preserve"><value>Orijinal komut</value></data>
+  <data name="ShellMenuConvertedPreview" xml:space="preserve"><value>Dönüştürülmüş önizleme</value></data>
+  <data name="ShellMenuReason" xml:space="preserve"><value>Neden</value></data>
+  <data name="ShellMenuAcceptRisk" xml:space="preserve"><value>Riski kabul et</value></data>
+  <data name="ShellMenuDirect" xml:space="preserve"><value>Doğrudan</value></data>
+  <data name="ShellMenuNeedsReview" xml:space="preserve"><value>İnceleme gerekli</value></data>
+  <data name="ShellMenuUnsupported" xml:space="preserve"><value>Desteklenmiyor</value></data>
+  <data name="ShellMenuScanDiagnostic" xml:space="preserve"><value>Tarama tanılaması</value></data>
+  <data name="ShellMenuReasonAmbiguousExecutable" xml:space="preserve"><value>Yürütülebilir dosya yolu belirsiz.</value></data>
+  <data name="ShellMenuReasonArgumentsUnparseable" xml:space="preserve"><value>Komut bağımsız değişkenleri güvenle ayrıştırılamıyor.</value></data>
+  <data name="ShellMenuReasonCascadeCycle" xml:space="preserve"><value>Alt menü bir döngü içeriyor.</value></data>
+  <data name="ShellMenuReasonCascadeDepth" xml:space="preserve"><value>Alt menü desteklenen derinliği aşıyor.</value></data>
+  <data name="ShellMenuReasonCascadeMissing" xml:space="preserve"><value>Alt menü hedefi eksik.</value></data>
+  <data name="ShellMenuReasonCommandEmpty" xml:space="preserve"><value>Kayıtlı komut boş.</value></data>
+  <data name="ShellMenuReasonCommandMissing" xml:space="preserve"><value>Kayıtlı statik komut yok.</value></data>
+  <data name="ShellMenuReasonConditionalVisibilityUnresolved" xml:space="preserve"><value>Gezgin yeniden üretilemeyen bir görünürlük koşulu kullanıyor.</value></data>
+  <data name="ShellMenuReasonDangerousHost" xml:space="preserve"><value>Komut bir sistem veya betik ana bilgisayarı kullanıyor ve onay gerektiriyor.</value></data>
+  <data name="ShellMenuReasonDynamicCom" xml:space="preserve"><value>Bu komut bir COM uzantısı tarafından dinamik olarak sağlanıyor.</value></data>
+  <data name="ShellMenuReasonDynamicHandler" xml:space="preserve"><value>Bu ilişkilendirme dinamik bir bağlam menüsü işleyicisi kullanıyor.</value></data>
+  <data name="ShellMenuReasonElevationSensitive" xml:space="preserve"><value>Komut yükseltilmiş izin istiyor.</value></data>
+  <data name="ShellMenuReasonExecutableMissing" xml:space="preserve"><value>Yürütülebilir dosya çözümlenemiyor.</value></data>
+  <data name="ShellMenuReasonExecutableQuoteUnclosed" xml:space="preserve"><value>Yürütülebilir dosya yolunda kapanmamış tırnak var.</value></data>
+  <data name="ShellMenuReasonHiddenByRegistration" xml:space="preserve"><value>Komut Gezgin kaydı tarafından gizleniyor.</value></data>
+  <data name="ShellMenuReasonMultiplePlaceholders" xml:space="preserve"><value>Komut birden fazla yol yer tutucusu içeriyor.</value></data>
+  <data name="ShellMenuReasonNotStatic" xml:space="preserve"><value>Bu statik bir komut değil.</value></data>
+  <data name="ShellMenuReasonRoundTripMismatch" xml:space="preserve"><value>Dönüştürülen bağımsız değişkenler orijinal komutu değiştirir.</value></data>
+  <data name="ShellMenuReasonScriptHost" xml:space="preserve"><value>Komut bir betik başlatıyor ve onay gerektiriyor.</value></data>
+  <data name="ShellMenuReasonShiftOnly" xml:space="preserve"><value>Gezgin bu komutu normalde yalnızca Shift basılıyken gösterir.</value></data>
+  <data name="ShellMenuReasonSourceIncomplete" xml:space="preserve"><value>Bir veya daha fazla kayıt defteri kaynağı okunamadı.</value></data>
+  <data name="ShellMenuReasonUnsupportedExecutable" xml:space="preserve"><value>Yürütülebilir dosya türü doğrudan içe aktarma için desteklenmiyor.</value></data>
+  <data name="ShellMenuReasonUnsupportedPlaceholder" xml:space="preserve"><value>Komut desteklenmeyen bir yer tutucu içeriyor.</value></data>
+  <data name="ShellMenuReasonViewConflict" xml:space="preserve"><value>32 bit ve 64 bit kayıtlar çakışıyor.</value></data>
+  <data name="ShellMenuReasonEnvironmentUnresolved" xml:space="preserve"><value>Bir ortam değişkeni çözümlenemedi.</value></data>
+  <data name="ShellMenuReasonCascadeReadFailed" xml:space="preserve"><value>Başvurulan alt menü okunamadı.</value></data>
+  <data name="ShellMenuReasonDde" xml:space="preserve"><value>Bu komut eski DDE davranışına bağlıdır.</value></data>
+  <data name="ShellMenuReasonIndirectTitleUnresolved" xml:space="preserve"><value>Yerelleştirilmiş menü başlığı çözümlenemedi.</value></data>
+  <data name="ShellMenuReasonScopePlaceholderMismatch" xml:space="preserve"><value>Yol yer tutucusu bu menü kapsamıyla eşleşmiyor.</value></data>
+  <data name="ShellMenuOnlyExistingExecutables" xml:space="preserve"><value>Yalnızca mevcut çalıştırılabilir dosyalar</value></data>
+  <data name="ShellMenuCreateCopy" xml:space="preserve"><value>Kopya oluştur</value></data>
+  <data name="ShellMenuExpandedCommand" xml:space="preserve"><value>Genişletilmiş komut</value></data>
+  <data name="ShellMenuParsedExecutable" xml:space="preserve"><value>Çözümlenen çalıştırılabilir dosya</value></data>
+  <data name="ShellMenuParsedArguments" xml:space="preserve"><value>Çözümlenen bağımsız değişkenler</value></data>
+  <data name="ShellMenuPlaceholderDetails" xml:space="preserve"><value>Yer tutucu ayrıntıları</value></data>
+  <data name="ShellMenuScanSummaryFormat" xml:space="preserve"><value>{0} aday, {1} tanılama</value></data>
+  <data name="ShellMenuResultsNotCurrent" xml:space="preserve"><value>Geçerli tarama sonucu yok</value></data>
+  <data name="ShellMenuScanSummaryCompleteFormat" xml:space="preserve"><value>{1} taranan kapsamda {0} aday; {2} tanılama</value></data>
+  <data name="ShellMenuScanSummaryPartialFormat" xml:space="preserve"><value>Kısmi: {1} taranan kapsamda {0} aday; {2} okuma hatası; {3} tanılama</value></data>
+  <data name="InvokeShellHandler" xml:space="preserve"><value>Kabuk eklentisini çalıştır</value></data>
+  <data name="ShellMenuShellBridge" xml:space="preserve"><value>Kabuk köprüsü</value></data>
+  <data name="ShellMenuReasonShellBridge" xml:space="preserve"><value>Gerçek Gezgin kabuk eklentisi üzerinden çalışır (alt menü gösterebilir).</value></data>
+  <data name="ShellMenuReasonHandlerClsidMissing" xml:space="preserve"><value>Kabuk eklentisi CLSID değeri eksik veya geçersiz.</value></data>
+</root>

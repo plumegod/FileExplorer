@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <DevExpressVersion>26.1.4-pre-26179</DevExpressVersion>
+    <DevExpressOfflinePackages>D:\Program Files\DevExpress 26.1\Components\Offline Packages</DevExpressOfflinePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition="Exists('$(DevExpressOfflinePackages)')">
+    <RestorePackagesPath>$(DevExpressOfflinePackages)</RestorePackagesPath>
+  </PropertyGroup>
+</Project>

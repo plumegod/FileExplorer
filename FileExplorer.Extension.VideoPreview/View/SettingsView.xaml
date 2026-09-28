@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="FileExplorer.Extension.VideoPreview.View.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:common="clr-namespace:FileExplorer.Extension.VideoPreview"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:properties="clr-namespace:FileExplorer.Extension.VideoPreview.Properties">
+
+    <UserControl.Resources>
+        <Style TargetType="dxe:SpinEdit">
+            <Setter Property="MinValue" Value="1" />
+            <Setter Property="IsFloatValue" Value="False" />
+            <Setter Property="EditValueType" Value="{x:Type system:Int32}" />
+        </Style>
+        <Style TargetType="dxe:ToggleSwitch">
+            <Setter Property="ContentPlacement" Value="Far" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="CheckedStateContent" Value="{x:Static properties:Resources.Yes}" />
+            <Setter Property="UncheckedStateContent" Value="{x:Static properties:Resources.No}" />
+        </Style>
+    </UserControl.Resources>
+
+    <dxlc:LayoutControl Padding="10">
+        <dxlc:LayoutGroup View="Tabs">
+            <dxlc:LayoutGroup Orientation="Vertical" ItemSpace="10" Header="{x:Static properties:Resources.General}">
+                <dxlc:LayoutItem Label="{x:Static properties:Resources.UseDirectShow}">
+                    <dxe:ToggleSwitch IsChecked="{Binding UseDirectShow}" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="{x:Static properties:Resources.RememberPlaybackPosition}">
+                    <dxe:ToggleSwitch IsChecked="{Binding RememberPlaybackPosition}" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="{x:Static properties:Resources.LoadBehavior}">
+                    <dxe:ComboBoxEdit IsTextEditable="False" EditValue="{Binding LoadBehavior}">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EnumItemsSourceBehavior EnumType="{x:Type common:LoadBehavior}"/>
+                        </dxmvvm:Interaction.Behaviors>
+						<dxe:ComboBoxEdit.ItemTemplate>
+							<DataTemplate>
+								<StackPanel>
+									<TextBlock Text="{Binding Name}" FontWeight="DemiBold" />
+									<TextBlock Text="{Binding Description}" />
+								</StackPanel>
+							</DataTemplate>
+						</dxe:ComboBoxEdit.ItemTemplate>
+					</dxe:ComboBoxEdit>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="{x:Static properties:Resources.NextTimeJump}">
+                    <dxe:SpinEdit MaxValue="3600" EditValue="{Binding NextTimeJump}" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="{x:Static properties:Resources.PreviousTimeJump}">
+                    <dxe:SpinEdit MaxValue="3600" EditValue="{Binding PreviousTimeJump}" />
+                </dxlc:LayoutItem>
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutGroup Orientation="Vertical" ItemSpace="10" Header="{x:Static properties:Resources.Thumbnails}">
+                <dxlc:LayoutItem Label="{x:Static properties:Resources.ShowThumbnails}">
+                    <dxe:ToggleSwitch IsChecked="{Binding ShowThumbnails}" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutGroup Orientation="Vertical" ItemSpace="10" IsEnabled="{Binding ShowThumbnails}">
+                    <dxlc:LayoutItem Label="{x:Static properties:Resources.CacheThumbnails}">
+                        <dxe:ToggleSwitch IsChecked="{Binding CacheThumbnails}" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="{x:Static properties:Resources.TimestampPosition}">
+                        <dxe:ComboBoxEdit IsTextEditable="False" EditValue="{Binding TimestampPosition}">
+                            <dxmvvm:Interaction.Behaviors>
+                                <dxmvvm:EnumItemsSourceBehavior EnumType="{x:Type common:TimestampPosition}" />
+                            </dxmvvm:Interaction.Behaviors>
+                        </dxe:ComboBoxEdit>
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="{x:Static properties:Resources.RowsAndColumns}">
+                        <dxlc:LayoutGroup>
+                            <dxe:SpinEdit MaxValue="32" EditValue="{Binding ThumbnailRows}" />
+                            <dxe:SpinEdit MaxValue="32" EditValue="{Binding ThumbnailColumns}" />
+                        </dxlc:LayoutGroup>
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+
+</UserControl>

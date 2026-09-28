@@ -1,0 +1,155 @@
+﻿<UserControl x:Class="FileExplorer.Extension.VideoPreview.View.VideoPlayer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:mediakit="clr-namespace:WPFMediaKit.DirectShow.Controls;assembly=WPFMediaKit"
+             xmlns:local="clr-namespace:FileExplorer.Extension.VideoPreview.View"
+             xmlns:settings="clr-namespace:FileExplorer.Extension.VideoPreview"
+             xmlns:converters="clr-namespace:FileExplorer.Extension.VideoPreview.Converters"
+             xmlns:behaviours="clr-namespace:FileExplorer.Extension.VideoPreview.Behaviours"
+             xmlns:properties="clr-namespace:FileExplorer.Extension.VideoPreview.Properties">
+
+	<dxmvvm:Interaction.Behaviors>
+		<dx:DialogService>
+			<dx:DialogService.DialogStyle>
+				<Style TargetType="dx:ThemedWindow">
+					<Setter Property="Padding" Value="0" />
+					<Setter Property="Width" Value="320" />
+					<Setter Property="Height" Value="320" />
+				</Style>
+			</dx:DialogService.DialogStyle>
+			<dx:DialogService.ViewTemplate>
+				<DataTemplate>
+					<local:SettingsView />
+				</DataTemplate>
+			</dx:DialogService.ViewTemplate>
+		</dx:DialogService>
+		<behaviours:WindowKeyDownBehavior />
+	</dxmvvm:Interaction.Behaviors>
+
+	<DockPanel Margin="10">
+		<dxb:ToolBarControl DockPanel.Dock="Bottom" Background="Transparent" HorizontalAlignment="Center" AllowQuickCustomization="False">
+			<dxb:BarButtonItem Command="{Binding ToggleLoadEjectCommand}" MediumGlyph="/FileExplorer.Extension.VideoPreview;component/Assets/Eject.svg">
+				<dxb:BarButtonItem.Style>
+					<Style TargetType="dxb:BarButtonItem">
+						<Setter Property="ToolTip" Value="{x:Static properties:Resources.Load}" />
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding Loaded}" Value="True">
+								<Setter Property="ToolTip" Value="{x:Static properties:Resources.Unload}" />
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</dxb:BarButtonItem.Style>
+			</dxb:BarButtonItem>
+			<dxb:BarButtonItem ToolTip="{x:Static properties:Resources.Previous}" Command="{Binding PreviousCommand}" MediumGlyph="/FileExplorer.Extension.VideoPreview;component/Assets/Backward.svg" />
+			<dxb:BarButtonItem Command="{Binding TogglePlayPauseCommand}">
+				<dxb:BarButtonItem.Style>
+					<Style TargetType="dxb:BarButtonItem">
+						<Setter Property="LargeGlyph" Value="/FileExplorer.Extension.VideoPreview;component/Assets/Play.svg" />
+						<Setter Property="ToolTip" Value="{x:Static properties:Resources.Play}" />
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding IsPlaying}" Value="True">
+								<Setter Property="LargeGlyph" Value="/FileExplorer.Extension.VideoPreview;component/Assets/Pause.svg" />
+								<Setter Property="ToolTip" Value="{x:Static properties:Resources.Pause}" />
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</dxb:BarButtonItem.Style>
+			</dxb:BarButtonItem>
+			<dxb:BarButtonItem ToolTip="{x:Static properties:Resources.Next}" Command="{Binding NextCommand}" MediumGlyph="/FileExplorer.Extension.VideoPreview;component/Assets/Forward.svg" />
+			<dxb:BarButtonItem ToolTip="{x:Static properties:Resources.Stop}" Command="{Binding StopCommand}" MediumGlyph="/FileExplorer.Extension.VideoPreview;component/Assets/Stop.svg" />
+			<dxb:BarStaticItem Content="{Binding}">
+				<dxb:BarStaticItem.ContentTemplate>
+					<DataTemplate>
+						<TextBlock Margin="20,0" FontSize="16" FontFamily="Consolas" VerticalAlignment="Center">
+                        <Run FontWeight="DemiBold">
+                            <Run.Text>
+                                <MultiBinding Converter="{converters:TimingToStringConverter}">
+                                    <Binding Path="Position" />
+                                    <Binding Path="Duration" />
+                                </MultiBinding>
+                            </Run.Text>
+                        </Run>
+                        <Run Text="/" />
+                        <Run>
+                            <Run.Text>
+                                <MultiBinding Converter="{converters:TimingToStringConverter}">
+                                    <Binding Path="Duration" />
+                                    <Binding Path="Duration" />
+                                </MultiBinding>
+                            </Run.Text>
+                        </Run>
+						</TextBlock>
+					</DataTemplate>
+				</dxb:BarStaticItem.ContentTemplate>
+			</dxb:BarStaticItem>
+			<dxb:BarCheckItem IsChecked="{Binding IsMuted}">
+				<dxb:BarCheckItem.Style>
+					<Style TargetType="dxb:BarCheckItem">
+						<Setter Property="MediumGlyph" Value="/FileExplorer.Extension.VideoPreview;component/Assets/Volume.svg" />
+						<Style.Triggers>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="MediumGlyph" Value="/FileExplorer.Extension.VideoPreview;component/Assets/Mute.svg" />
+							</Trigger>
+						</Style.Triggers>
+					</Style>
+				</dxb:BarCheckItem.Style>
+			</dxb:BarCheckItem>
+			<dxb:BarEditItem EditWidth="100" EditValue="{Binding Volume}">
+				<dxb:BarEditItem.EditSettings>
+					<dxe:TrackBarEditSettings TickPlacement="None" SmallStep="0.05" LargeStep="0.1" Maximum="1" />
+				</dxb:BarEditItem.EditSettings>
+			</dxb:BarEditItem>
+			<dxb:BarButtonItem ToolTip="{x:Static properties:Resources.Settings}" MediumGlyph="/FileExplorer.Extension.VideoPreview;component/Assets/Settings.svg" Command="{Binding ShowSettingsCommand}" />
+		</dxb:ToolBarControl>
+		<Grid DockPanel.Dock="Bottom">
+			<dxmvvm:Interaction.Behaviors>
+				<behaviours:TrackBarPauseResumeBehavior />
+			</dxmvvm:Interaction.Behaviors>
+			<dxe:TrackBarEdit Margin="10,0" HorizontalAlignment="Stretch" TickPlacement="None" Maximum="{Binding Duration}" EditValue="{Binding Position}" />
+		</Grid>
+		<Grid Margin="0,10">
+			<Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="{Binding ThumbnailImage}">
+				<Image.Visibility>
+					<MultiBinding Converter="{converters:MultiBooleanToVisibilityConverter}">
+						<Binding Path="ShowThumbnails" Source="{x:Static settings:VideoPreviewSettings.Default}" />
+						<Binding Path="ThumbnailImage" Converter="{dxmvvm:ObjectToBooleanConverter}" />
+						<Binding Path="Opened" Converter="{dxmvvm:BooleanNegationConverter}" />
+					</MultiBinding>
+				</Image.Visibility>
+			</Image>
+			<Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="{Binding AudioAlbumImage}">
+				<Image.Visibility>
+					<MultiBinding Converter="{converters:MultiBooleanToVisibilityConverter}">
+						<Binding Path="AudioAlbumImage" Converter="{dxmvvm:ObjectToBooleanConverter}" />
+						<Binding Path="ThumbnailImage" Converter="{dxmvvm:ObjectToBooleanConverter Inverse=True}" />
+					</MultiBinding>
+				</Image.Visibility>
+			</Image>
+			<Grid Visibility="{Binding Opened, Converter={dxmvvm:BooleanToVisibilityConverter}}">
+				<MediaElement Visibility="{Binding UseDirectShow, Source={x:Static settings:VideoPreviewSettings.Default}, Converter={dxmvvm:BooleanToVisibilityConverter Inverse=True}}"
+                          Volume="{Binding Volume}" IsMuted="{Binding IsMuted}" MediaFailed="OnMediaFailed">
+					<dxmvvm:Interaction.Behaviors>
+						<dxmvvm:UIObjectService x:Name="DefaultVideoPlayerService" />
+						<dxmvvm:EventToCommand EventName="MediaOpened" Command="{Binding MediaOpenedCommand}" />
+						<dxmvvm:EventToCommand EventName="MouseLeftButtonDown" Command="{Binding TogglePlayPauseCommand}" />
+					</dxmvvm:Interaction.Behaviors>
+				</MediaElement>
+				<mediakit:MediaUriElement Visibility="{Binding UseDirectShow, Source={x:Static settings:VideoPreviewSettings.Default}, Converter={dxmvvm:BooleanToVisibilityConverter}}"
+                                      Volume="{Binding Volume, Mode=TwoWay}" MediaPosition="{Binding Position, Mode=TwoWay, Converter={converters:LongToDoubleConverter}}"
+                                      MediaFailed="OnMediaFailed" UnloadedBehavior="Stop">
+					<dxmvvm:Interaction.Behaviors>
+						<dxmvvm:UIObjectService x:Name="DirectShowVideoPlayerService" />
+						<dxmvvm:EventToCommand EventName="MediaOpened" Command="{Binding MediaOpenedCommand}" />
+						<dxmvvm:EventToCommand EventName="MouseLeftButtonDown" Command="{Binding TogglePlayPauseCommand}" />
+					</dxmvvm:Interaction.Behaviors>
+				</mediakit:MediaUriElement>
+			</Grid>
+			<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Text="{Binding ErrorMessage}" Visibility="{Binding ErrorMessage, Converter={dxmvvm:StringToVisibilityConverter}}" />
+		</Grid>
+	</DockPanel>
+
+</UserControl>

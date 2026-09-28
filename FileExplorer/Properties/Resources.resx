@@ -1,0 +1,1163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddColumn" xml:space="preserve">
+    <value>Add Column</value>
+  </data>
+  <data name="AddRemoveMenuItems" xml:space="preserve">
+    <value>Add / Remove Menu Items</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="ApplicationError" xml:space="preserve">
+    <value>Application Error</value>
+  </data>
+  <data name="ApplicationErrorOccured" xml:space="preserve">
+    <value>An application error has occured.</value>
+  </data>
+  <data name="BackToDefault" xml:space="preserve">
+    <value>Back To Default</value>
+  </data>
+  <data name="Backward" xml:space="preserve">
+    <value>Back to '{0}'</value>
+  </data>
+  <data name="BestFitAllColumns" xml:space="preserve">
+    <value>Best Fit All Columns</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Clipboard" xml:space="preserve">
+    <value>Clipboard</value>
+  </data>
+  <data name="ConfirmCopy" xml:space="preserve">
+    <value>Confirm Copy</value>
+  </data>
+  <data name="ConfirmCopyMessage" xml:space="preserve">
+    <value>Do you want to copy '{0}' to '{1}' ?</value>
+  </data>
+  <data name="ConfirmMove" xml:space="preserve">
+    <value>Confirm Move</value>
+  </data>
+  <data name="ConfirmMoveMessage" xml:space="preserve">
+    <value>Do you want to move '{0}' to '{1}' ?</value>
+  </data>
+  <data name="ConfirmMultipleCopy" xml:space="preserve">
+    <value>Do you want to copy selected objects to '{0}' ?</value>
+  </data>
+  <data name="ConfirmMultipleMove" xml:space="preserve">
+    <value>Do you want to move selected objects to '{0}' ?</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="CopyPath" xml:space="preserve">
+    <value>Copy Path</value>
+  </data>
+  <data name="CopyTo" xml:space="preserve">
+    <value>Copy To</value>
+  </data>
+  <data name="CustomColumn" xml:space="preserve">
+    <value>Custom Column</value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="DateAccessed" xml:space="preserve">
+    <value>Date Accessed</value>
+  </data>
+  <data name="DateCreated" xml:space="preserve">
+    <value>Date Created</value>
+  </data>
+  <data name="DateModified" xml:space="preserve">
+    <value>Date Modified</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="DetailsPane" xml:space="preserve">
+    <value>Details Pane</value>
+  </data>
+  <data name="DuplicateFileName" xml:space="preserve">
+    <value>Duplicate File Name</value>
+  </data>
+  <data name="DuplicateFileNameMessage" xml:space="preserve">
+    <value>Some names were assigned to more than one file.</value>
+  </data>
+  <data name="EditCustomColumn" xml:space="preserve">
+    <value>Edit Custom Column</value>
+  </data>
+  <data name="EmptyFiles" xml:space="preserve">
+    <value>Folders &amp; Empty Files</value>
+  </data>
+  <data name="Extension" xml:space="preserve">
+    <value>Extension</value>
+  </data>
+  <data name="ExtensionFilter" xml:space="preserve">
+    <value>Extension Filter</value>
+  </data>
+  <data name="ExtraLargeIcons" xml:space="preserve">
+    <value>Extra Large Icons</value>
+  </data>
+  <data name="Forward" xml:space="preserve">
+    <value>Forward to '{0}'</value>
+  </data>
+  <data name="GroupBy" xml:space="preserve">
+    <value>Group By</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="InvalidFileName" xml:space="preserve">
+    <value>Invalid File Name</value>
+  </data>
+  <data name="InvalidFileNameMessage" xml:space="preserve">
+    <value>File name can't be empty or contain any of the following characters: \ / : * ? "" &lt; &gt; |</value>
+  </data>
+  <data name="InvertSelection" xml:space="preserve">
+    <value>Invert Selection</value>
+  </data>
+  <data name="LargeIcons" xml:space="preserve">
+    <value>Large Icons</value>
+  </data>
+  <data name="Layout" xml:space="preserve">
+    <value>Layout</value>
+  </data>
+  <data name="List" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="LoadLayout" xml:space="preserve">
+    <value>Load Layout</value>
+  </data>
+  <data name="Mail" xml:space="preserve">
+    <value>Mail</value>
+  </data>
+  <data name="MediumIcons" xml:space="preserve">
+    <value>Medium Icons</value>
+  </data>
+  <data name="MoveTo" xml:space="preserve">
+    <value>Move To</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NavigationPane" xml:space="preserve">
+    <value>Navigation Pane</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="NewFile" xml:space="preserve">
+    <value>New File</value>
+  </data>
+  <data name="NewFolder" xml:space="preserve">
+    <value>New Folder</value>
+  </data>
+  <data name="NewName" xml:space="preserve">
+    <value>New Name</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Organize" xml:space="preserve">
+    <value>Organize</value>
+  </data>
+  <data name="Panes" xml:space="preserve">
+    <value>Panes</value>
+  </data>
+  <data name="Parent" xml:space="preserve">
+    <value>Parent</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="Path" xml:space="preserve">
+    <value>Path</value>
+  </data>
+  <data name="Pattern" xml:space="preserve">
+    <value>Pattern</value>
+  </data>
+  <data name="PermanentlyDelete" xml:space="preserve">
+    <value>Permanently Delete</value>
+  </data>
+  <data name="PinToQuickAccess" xml:space="preserve">
+    <value>Pin To Quick Access</value>
+  </data>
+  <data name="PreviewPane" xml:space="preserve">
+    <value>Preview Pane</value>
+  </data>
+  <data name="PrintPreview" xml:space="preserve">
+    <value>Print Preview</value>
+  </data>
+  <data name="Properties" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="Recycle" xml:space="preserve">
+    <value>Recycle</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="RemoveCustomColumn" xml:space="preserve">
+    <value>Remove Custom Column</value>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="Row" xml:space="preserve">
+    <value>Row</value>
+  </data>
+  <data name="RowsColumns" xml:space="preserve">
+    <value>Rows &amp; Columns</value>
+  </data>
+  <data name="SaveLayout" xml:space="preserve">
+    <value>Save Layout</value>
+  </data>
+  <data name="SearchTitle" xml:space="preserve">
+    <value>Search: {0}</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Select All</value>
+  </data>
+  <data name="SelectionFilter" xml:space="preserve">
+    <value>Selection Filter</value>
+  </data>
+  <data name="ItemTypeFilter" xml:space="preserve">
+    <value>Item Type Filter</value>
+  </data>
+  <data name="SelectNone" xml:space="preserve">
+    <value>Select None</value>
+  </data>
+  <data name="ShowCheckBoxes" xml:space="preserve">
+    <value>Show Check Boxes</value>
+  </data>
+  <data name="ShowFileExtensions" xml:space="preserve">
+    <value>Show File Extensions</value>
+  </data>
+  <data name="ShowHiddenItems" xml:space="preserve">
+    <value>Show Hidden Items</value>
+  </data>
+  <data name="ShowHide" xml:space="preserve">
+    <value>Show / Hide</value>
+  </data>
+  <data name="ShowRowNumbers" xml:space="preserve">
+    <value>Show Row Numbers</value>
+  </data>
+  <data name="ShowSystemItems" xml:space="preserve">
+    <value>Show System Items</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="SmallIcons" xml:space="preserve">
+    <value>Small Icons</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Sort By</value>
+  </data>
+  <data name="StandardThemes" xml:space="preserve">
+    <value>Standard Themes</value>
+  </data>
+  <data name="Themes" xml:space="preserve">
+    <value>Themes</value>
+  </data>
+  <data name="TotalFormat" xml:space="preserve">
+    <value>Total: {0}</value>
+  </data>
+  <data name="TouchThemes" xml:space="preserve">
+    <value>Touch Themes</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="UnpinFromQuickAccess" xml:space="preserve">
+    <value>Unpin From Quick Access</value>
+  </data>
+  <data name="Up" xml:space="preserve">
+    <value>Up to '{0}'</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Zip" xml:space="preserve">
+    <value>Zip</value>
+  </data>
+  <data name="GroupName" xml:space="preserve">
+    <value>Group Name</value>
+  </data>
+  <data name="NewMenuItem" xml:space="preserve">
+    <value>New Menu Item</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Progress" xml:space="preserve">
+    <value>Progress</value>
+  </data>
+  <data name="Unzip" xml:space="preserve">
+    <value>Unzip</value>
+  </data>
+  <data name="CompressedSize" xml:space="preserve">
+    <value>Compressed Size</value>
+  </data>
+  <data name="UncompressedSize" xml:space="preserve">
+    <value>Uncompressed Size</value>
+  </data>
+  <data name="WrongPassword" xml:space="preserve">
+    <value>Wrong Password</value>
+  </data>
+  <data name="WrongPasswordMessage" xml:space="preserve">
+    <value>Provided password is wrong. Do you want to skip this file?</value>
+  </data>
+  <data name="OpenContainingFolder" xml:space="preserve">
+    <value>Open Containing Folder</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="NewTab" xml:space="preserve">
+    <value>New Tab</value>
+  </data>
+  <data name="CopyMove" xml:space="preserve">
+    <value>Copy &amp; Move</value>
+  </data>
+  <data name="CopyWindows" xml:space="preserve">
+    <value>Copy (Windows Standard)</value>
+  </data>
+  <data name="DragDrop" xml:space="preserve">
+    <value>Drag &amp; Drop</value>
+  </data>
+  <data name="DragDropDifferentDrive" xml:space="preserve">
+    <value>Drag &amp; Drop to Different Drive</value>
+  </data>
+  <data name="DragDropSameDrive" xml:space="preserve">
+    <value>Drag &amp; Drop to Same Drive</value>
+  </data>
+  <data name="Move" xml:space="preserve">
+    <value>Move</value>
+  </data>
+  <data name="MoveWindows" xml:space="preserve">
+    <value>Move (Windows Standard)</value>
+  </data>
+  <data name="Advanced" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="FolderNotFound" xml:space="preserve">
+    <value>Windows can't find the folder specified. Check the spelling and try again.</value>
+  </data>
+  <data name="LowerCase" xml:space="preserve">
+    <value>Lower Case</value>
+  </data>
+  <data name="Multiple" xml:space="preserve">
+    <value>Multiple</value>
+  </data>
+  <data name="SentenceCase" xml:space="preserve">
+    <value>Sentence Case</value>
+  </data>
+  <data name="TitleCase" xml:space="preserve">
+    <value>Title Case</value>
+  </data>
+  <data name="ToggleCase" xml:space="preserve">
+    <value>Toggle Case</value>
+  </data>
+  <data name="UpperCase" xml:space="preserve">
+    <value>Upper Case</value>
+  </data>
+  <data name="ColumnName" xml:space="preserve">
+    <value>Column Name</value>
+  </data>
+  <data name="ColumnType" xml:space="preserve">
+    <value>Column Type</value>
+  </data>
+  <data name="Expression" xml:space="preserve">
+    <value>Expression</value>
+  </data>
+  <data name="CustomMenuItems" xml:space="preserve">
+    <value>Custom Menu Items</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="Single" xml:space="preserve">
+    <value>Single</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="AllSubfolders" xml:space="preserve">
+    <value>All Subfolders</value>
+  </data>
+  <data name="CurrentFolder" xml:space="preserve">
+    <value>Current Folder</value>
+  </data>
+  <data name="SearchFilter" xml:space="preserve">
+    <value>Search &amp; Filter</value>
+  </data>
+  <data name="SearchTools" xml:space="preserve">
+    <value>Search Tools</value>
+  </data>
+  <data name="CopyAllColumns" xml:space="preserve">
+    <value>Copy to Clipboard (all columns)</value>
+  </data>
+  <data name="CopyThisColumn" xml:space="preserve">
+    <value>Copy to Clipboard (this column)</value>
+  </data>
+  <data name="ShowColumnChooser" xml:space="preserve">
+    <value>Show Column Chooser</value>
+  </data>
+  <data name="AddCustomColumn" xml:space="preserve">
+    <value>Add Custom Column</value>
+  </data>
+  <data name="LayoutLoadError" xml:space="preserve">
+    <value>Layout Load Error</value>
+  </data>
+  <data name="LayoutLoadErrorOccured" xml:space="preserve">
+    <value>An error occurred while loading the layout. Reverted to default layout.</value>
+  </data>
+  <data name="Customizations" xml:space="preserve">
+    <value>Customizations</value>
+  </data>
+  <data name="Folder" xml:space="preserve">
+    <value>Folder</value>
+  </data>
+  <data name="LoadDefaultLayout" xml:space="preserve">
+    <value>Load Default Layout</value>
+  </data>
+  <data name="ManageSavedLayouts" xml:space="preserve">
+    <value>Manage Saved Layouts</value>
+  </data>
+  <data name="Shortcut" xml:space="preserve">
+    <value>Shortcut</value>
+  </data>
+  <data name="LayoutSaved" xml:space="preserve">
+    <value>Layout Saved</value>
+  </data>
+  <data name="LayoutSaveSuccessful" xml:space="preserve">
+    <value>The layout has been successfully saved.</value>
+  </data>
+  <data name="RecentLocations" xml:space="preserve">
+    <value>Recent Locations</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="OpenInNewTab" xml:space="preserve">
+    <value>Open in New Tab</value>
+  </data>
+  <data name="OpenInNewWindow" xml:space="preserve">
+    <value>Open in New Window</value>
+  </data>
+  <data name="ManageExpressions" xml:space="preserve">
+    <value>Manage Expressions</value>
+  </data>
+  <data name="OpenWithApplication" xml:space="preserve">
+    <value>Open with Application</value>
+  </data>
+  <data name="Command" xml:space="preserve">
+    <value>Command</value>
+  </data>
+  <data name="Parameter" xml:space="preserve">
+    <value>Parameter</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="AddToStartup" xml:space="preserve">
+    <value>Add to Startup</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Computer" xml:space="preserve">
+    <value>Computer</value>
+  </data>
+  <data name="QuickAccess" xml:space="preserve">
+    <value>Quick Access</value>
+  </data>
+  <data name="ClearSorting" xml:space="preserve">
+    <value>Clear Sorting</value>
+  </data>
+  <data name="ParentName" xml:space="preserve">
+    <value>Parent Name</value>
+  </data>
+  <data name="ParentPath" xml:space="preserve">
+    <value>Parent Path</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>Network</value>
+  </data>
+  <data name="ExpandToOpenFolder" xml:space="preserve">
+    <value>Expand To Open Folder</value>
+  </data>
+  <data name="ShowNavigationPane" xml:space="preserve">
+    <value>Show Navigation Pane</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>Content</value>
+  </data>
+  <data name="StaticTaskbarIcon" xml:space="preserve">
+    <value>Static Taskbar Icon</value>
+  </data>
+  <data name="StaticTaskbarTitle" xml:space="preserve">
+    <value>Static Taskbar Title</value>
+  </data>
+  <data name="NoPreviewAvailable" xml:space="preserve">
+    <value>There are no preview extensions registered for this file type</value>
+  </data>
+  <data name="Extensions" xml:space="preserve">
+    <value>Extensions</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Preferred" xml:space="preserve">
+    <value>Preferred</value>
+  </data>
+  <data name="ExtensionError" xml:space="preserve">
+    <value>This extension contains an error and cannot be enabled. Refer to error details for more information.</value>
+  </data>
+  <data name="ErrorDetails" xml:space="preserve">
+    <value>Error Details</value>
+  </data>
+  <data name="FileFormatError" xml:space="preserve">
+    <value>The file format is incorrect or the file is corrupt</value>
+  </data>
+  <data name="UnifiedSorting" xml:space="preserve">
+    <value>Unified Sorting</value>
+  </data>
+  <data name="Virtualization" xml:space="preserve">
+    <value>Virtualization</value>
+  </data>
+  <data name="SupportedFileTypes" xml:space="preserve">
+    <value>Supported File Types</value>
+  </data>
+  <data name="AskBeforeDownloadingUpdates" xml:space="preserve">
+    <value>Ask Before Downloading Updates</value>
+  </data>
+  <data name="CheckForUpdates" xml:space="preserve">
+    <value>Check for Updates at Startup</value>
+  </data>
+  <data name="DownloadUpdatesAutomatically" xml:space="preserve">
+    <value>Download Updates Automatically</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>A new version of the application is available</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Restart</value>
+  </data>
+  <data name="RestartRequired" xml:space="preserve">
+    <value>A new version of the application has been downloaded and a restart is required to complete the installation</value>
+  </data>
+  <data name="DownloadInProgress" xml:space="preserve">
+    <value>Downloading a new version of the application</value>
+  </data>
+  <data name="RestartConfirmation" xml:space="preserve">
+    <value>A new version of the application has been downloaded and a restart is required to complete the installation. Do you want to restart now?</value>
+  </data>
+  <data name="UpdateConfirmation" xml:space="preserve">
+    <value>A new version of the application is available. Do you want to download and install?</value>
+  </data>
+  <data name="DownloadUpdates" xml:space="preserve">
+    <value>Download Updates</value>
+  </data>
+  <data name="NoUpdateAvailable" xml:space="preserve">
+    <value>No updates are currently available</value>
+  </data>
+  <data name="DateTimeFormat" xml:space="preserve">
+    <value>Date and Time Format</value>
+  </data>
+  <data name="SaveSession" xml:space="preserve">
+    <value>Save Session on Close</value>
+  </data>
+  <data name="DefaultSearch" xml:space="preserve">
+    <value>Default Search</value>
+  </data>
+  <data name="SearchWithEverything" xml:space="preserve">
+    <value>Search with Everything</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="HelpSearchWithEverything" xml:space="preserve">
+    <value>Everything is a freeware desktop search utility for Windows that can rapidly find files and folders by name.
+When enabled, FileExplorer prefers Everything for subfolder searches and falls back automatically if unavailable.</value>
+  </data>
+  <data name="EverythingInstallDirectory" xml:space="preserve">
+    <value>Everything Install Directory</value>
+  </data>
+  <data name="HelpEverythingInstallDirectory" xml:space="preserve">
+    <value>Select the folder that contains Everything.exe.
+FileExplorer will try to start Everything automatically when this directory is set.</value>
+  </data>
+  <data name="HelpAddToStartup" xml:space="preserve">
+    <value>FileExplorer is added to Windows startup, making the application launch much faster.</value>
+  </data>
+  <data name="HelpSaveSession" xml:space="preserve">
+    <value>Open windows and tabs are saved when the application is closed and all restored the next time it is opened.</value>
+  </data>
+  <data name="HelpStaticTaskbarIcon" xml:space="preserve">
+    <value>By default, the icon of the current folder is shown in the taskbar.
+Enable this option to show a static icon.</value>
+  </data>
+  <data name="HelpStaticTaskbarTitle" xml:space="preserve">
+    <value>By default, the name of the current folder is shown in the taskbar.
+Enable this option to show a static title.</value>
+  </data>
+  <data name="HelpUnifiedSorting" xml:space="preserve">
+    <value>Regardless of the sorting column, FileExplorer always sorts folders first and files second.
+Enable this option to sort them all together.</value>
+  </data>
+  <data name="HelpVirtualization" xml:space="preserve">
+    <value>Virtualization improves performance when scrolling the contents of folders containing large numbers of files or folders.
+When scrolling, the blur effect is shown while files and folders are loading in the background.</value>
+  </data>
+  <data name="Expand" xml:space="preserve">
+    <value>Expand</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="SelectedFromat" xml:space="preserve">
+    <value>Selected: {0}</value>
+  </data>
+  <data name="FrameWidth" xml:space="preserve">
+    <value>Image/Video Width</value>
+  </data>
+  <data name="FrameHeight" xml:space="preserve">
+    <value>Image/Video Height</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="AudioBitrate" xml:space="preserve">
+    <value>Audio Bitrate</value>
+  </data>
+  <data name="AudioChannels" xml:space="preserve">
+    <value>Audio Channels</value>
+  </data>
+  <data name="AudioSampleRate" xml:space="preserve">
+    <value>Audio Sample Rate</value>
+  </data>
+  <data name="Album" xml:space="preserve">
+    <value>Album</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Genre" xml:space="preserve">
+    <value>Genre</value>
+  </data>
+  <data name="AlbumArtists" xml:space="preserve">
+    <value>Album Artists</value>
+  </data>
+  <data name="ContributingArtists" xml:space="preserve">
+    <value>Contributing Artists</value>
+  </data>
+  <data name="Composers" xml:space="preserve">
+    <value>Composers</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="Track" xml:space="preserve">
+    <value>Track</value>
+  </data>
+  <data name="TrackCount" xml:space="preserve">
+    <value>Track Count</value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="Thumbnails" xml:space="preserve">
+    <value>Thumbnails</value>
+  </data>
+  <data name="Mode" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="Focus" xml:space="preserve">
+    <value>Focus</value>
+  </data>
+  <data name="Crop" xml:space="preserve">
+    <value>Crop</value>
+  </data>
+  <data name="Stretch" xml:space="preserve">
+    <value>Stretch</value>
+  </data>
+  <data name="Contain" xml:space="preserve">
+    <value>Contain</value>
+  </data>
+  <data name="CropDescription" xml:space="preserve">
+    <value>Crop the image if necessary to preserve the aspect ratio</value>
+  </data>
+  <data name="ContainDescription" xml:space="preserve">
+    <value>Reduce one of the output dimensions if necessary to preserve the aspect ratio</value>
+  </data>
+  <data name="StretchDescription" xml:space="preserve">
+    <value>Stretch the image on one axis if necessary to fill the output dimensions</value>
+  </data>
+  <data name="Top" xml:space="preserve">
+    <value>Top</value>
+  </data>
+  <data name="Bottom" xml:space="preserve">
+    <value>Bottom</value>
+  </data>
+  <data name="Left" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="Right" xml:space="preserve">
+    <value>Right</value>
+  </data>
+  <data name="Center" xml:space="preserve">
+    <value>Center</value>
+  </data>
+  <data name="TopLeft" xml:space="preserve">
+    <value>Top Left</value>
+  </data>
+  <data name="TopRight" xml:space="preserve">
+    <value>Top Right</value>
+  </data>
+  <data name="BottomLeft" xml:space="preserve">
+    <value>Bottom Left</value>
+  </data>
+  <data name="BottomRight" xml:space="preserve">
+    <value>Bottom Right</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="Prefix" xml:space="preserve">
+    <value>Prefix</value>
+  </data>
+  <data name="Suffix" xml:space="preserve">
+    <value>Suffix</value>
+  </data>
+  <data name="ConfirmBeforeRun" xml:space="preserve">
+    <value>Confirm Before Run</value>
+  </data>
+  <data name="WorkingDirectory" xml:space="preserve">
+    <value>Working Directory</value>
+  </data>
+  <data name="RunCommand" xml:space="preserve">
+    <value>Run Command</value>
+  </data>
+  <data name="SaveSelection" xml:space="preserve">
+    <value>Save Selection</value>
+  </data>
+  <data name="RestoreSelection" xml:space="preserve">
+    <value>Restore Selection</value>
+  </data>
+  <data name="AutoRestoreSelection" xml:space="preserve">
+    <value>Auto Restore Selection</value>
+  </data>
+  <data name="DateDeleted" xml:space="preserve">
+    <value>Date Deleted</value>
+  </data>
+  <data name="OriginalLocation" xml:space="preserve">
+    <value>Original Location</value>
+  </data>
+  <data name="RecycleBin" xml:space="preserve">
+    <value>Recycle Bin</value>
+  </data>
+  <data name="EmptyRecycleBin" xml:space="preserve">
+    <value>Empty Recycle Bin</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="RestoreAll" xml:space="preserve">
+    <value>Restore All</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="Integer" xml:space="preserve">
+    <value>Integer</value>
+  </data>
+  <data name="Decimal" xml:space="preserve">
+    <value>Decimal</value>
+  </data>
+  <data name="DateTime" xml:space="preserve">
+    <value>Date &amp; Time</value>
+  </data>
+  <data name="Boolean" xml:space="preserve">
+    <value>True / False</value>
+  </data>
+  <data name="Selection" xml:space="preserve">
+    <value>Selection</value>
+  </data>
+  <data name="RecycleBinProperties" xml:space="preserve">
+    <value>Recycle Bin Properties</value>
+  </data>
+  <data name="Manage" xml:space="preserve">
+    <value>Manage</value>
+  </data>
+  <data name="RestoreSelected" xml:space="preserve">
+    <value>Restore Selected</value>
+  </data>
+  <data name="ShowErrors" xml:space="preserve">
+    <value>Show Errors</value>
+  </data>
+  <data name="QuickPreview" xml:space="preserve">
+    <value>Quick Preview</value>
+  </data>
+  <data name="HelpQuickPreview" xml:space="preserve">
+    <value>Show a lightweight hover preview near the file list for the selected file types. Only the hovered file is loaded.</value>
+  </data>
+  <data name="ImageFiles" xml:space="preserve">
+    <value>Image files</value>
+  </data>
+  <data name="ImagePreviews" xml:space="preserve">
+    <value>Image previews</value>
+  </data>
+  <data name="ToolPresets" xml:space="preserve">
+    <value>Common tool templates</value>
+  </data>
+  <data name="ToolPresetDescription" xml:space="preserve">
+    <value>Choose commands from installed tools, then add them to the custom menu.</value>
+  </data>
+  <data name="ToolPresetAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="ToolPresetTool" xml:space="preserve">
+    <value>Tool</value>
+  </data>
+  <data name="ToolPresetStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="ToolPresetArguments" xml:space="preserve">
+    <value>Arguments</value>
+  </data>
+  <data name="ToolPresetLocate" xml:space="preserve">
+    <value>Locate</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="AddSelected" xml:space="preserve">
+    <value>Add selected</value>
+  </data>
+  <data name="AddedCountFormat" xml:space="preserve">
+    <value>Added: {0}</value>
+  </data>
+  <data name="ToolPresetStatusAdded" xml:space="preserve">
+    <value>Added</value>
+  </data>
+  <data name="ToolPresetStatusInvalidOverride" xml:space="preserve">
+    <value>Custom path is no longer valid</value>
+  </data>
+  <data name="ToolPresetStatusFound" xml:space="preserve">
+    <value>Found</value>
+  </data>
+  <data name="ToolPresetStatusMissing" xml:space="preserve">
+    <value>Not found</value>
+  </data>
+  <data name="ToolPresetCannotDuplicate" xml:space="preserve">
+    <value>Template items cannot be duplicated. Delete and add the template again instead.</value>
+  </data>
+  <data name="ToolPresetRawArgumentsWarning" xml:space="preserve">
+    <value>Advanced: editing the arguments below overrides structured quoting for this run only.</value>
+  </data>
+  <data name="ToolPresetErrorFormat" xml:space="preserve">
+    <value>The tool command cannot be used: {0}</value>
+  </data>
+  <data name="ToolPresetGitBashHere" xml:space="preserve">
+    <value>Git Bash Here</value>
+  </data>
+  <data name="ToolPresetGitGuiHere" xml:space="preserve">
+    <value>Git GUI Here</value>
+  </data>
+  <data name="ToolPresetCommit" xml:space="preserve">
+    <value>Commit</value>
+  </data>
+  <data name="ToolPresetSync" xml:space="preserve">
+    <value>Sync</value>
+  </data>
+  <data name="ToolPresetPull" xml:space="preserve">
+    <value>Pull</value>
+  </data>
+  <data name="ToolPresetPush" xml:space="preserve">
+    <value>Push</value>
+  </data>
+  <data name="ToolPresetLog" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="ToolPresetDiff" xml:space="preserve">
+    <value>Diff</value>
+  </data>
+  <data name="ToolPresetUpdate" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="ToolPresetCleanup" xml:space="preserve">
+    <value>Cleanup</value>
+  </data>
+  <data name="ToolPresetRepositoryBrowser" xml:space="preserve">
+    <value>Repository browser</value>
+  </data>
+  <data name="ToolPresetSevenZipOpen" xml:space="preserve">
+    <value>Open with 7-Zip</value>
+  </data>
+  <data name="ToolPresetExtractHere" xml:space="preserve">
+    <value>Extract here</value>
+  </data>
+  <data name="ToolPresetExtractFolder" xml:space="preserve">
+    <value>Extract to matching folder</value>
+  </data>
+  <data name="ToolPresetCompressSevenZip" xml:space="preserve">
+    <value>Compress to .7z</value>
+  </data>
+  <data name="ToolPresetErrorUnknownPreset" xml:space="preserve">
+    <value>This template is no longer available. Delete it and add a supported template.</value>
+  </data>
+  <data name="ToolPresetErrorExecutableMissing" xml:space="preserve">
+    <value>The configured tool executable no longer exists. Locate the tool again.</value>
+  </data>
+  <data name="ToolPresetErrorWrongExecutable" xml:space="preserve">
+    <value>The selected executable does not match this tool command.</value>
+  </data>
+  <data name="ToolPresetErrorSelectionRequired" xml:space="preserve">
+    <value>Select a file or folder first.</value>
+  </data>
+  <data name="ToolPresetErrorSingleSelectionRequired" xml:space="preserve">
+    <value>This command requires exactly one selected item.</value>
+  </data>
+  <data name="ToolPresetErrorFileRequired" xml:space="preserve">
+    <value>This command is available for files only.</value>
+  </data>
+  <data name="ToolPresetErrorFolderRequired" xml:space="preserve">
+    <value>This command is available for folders only.</value>
+  </data>
+  <data name="ToolPresetErrorUnsupportedArchive" xml:space="preserve">
+    <value>The selected file is not a supported archive type.</value>
+  </data>
+  <data name="ToolPresetErrorDifferentParents" xml:space="preserve">
+    <value>All selected items must be in the same folder.</value>
+  </data>
+  <data name="ToolPresetErrorWorkingDirectoryMissing" xml:space="preserve">
+    <value>The working folder is no longer available. Refresh the folder and try again.</value>
+  </data>
+  <data name="MenuContext" xml:space="preserve"><value>Menu context</value></data>
+  <data name="MenuContextLegacy" xml:space="preserve"><value>Legacy (selection or background)</value></data>
+  <data name="MenuContextFileSelection" xml:space="preserve"><value>Selected files</value></data>
+  <data name="MenuContextDirectorySelection" xml:space="preserve"><value>Selected folders</value></data>
+  <data name="MenuContextDirectoryBackground" xml:space="preserve"><value>Folder background</value></data>
+  <data name="MenuContextDriveSelection" xml:space="preserve"><value>Selected drives</value></data>
+  <data name="MenuContextFileSystemSelection" xml:space="preserve"><value>Selected files or folders</value></data>
+  <data name="ShellMenuImport" xml:space="preserve"><value>Import from Explorer</value></data>
+  <data name="ShellMenuExtension" xml:space="preserve"><value>Extension</value></data>
+  <data name="ShellMenuAllLevels" xml:space="preserve"><value>All levels</value></data>
+  <data name="ShellMenuScan" xml:space="preserve"><value>Scan</value></data>
+  <data name="ShellMenuScope" xml:space="preserve"><value>Scope</value></data>
+  <data name="ShellMenuSource" xml:space="preserve"><value>Source</value></data>
+  <data name="ShellMenuConversionLevel" xml:space="preserve"><value>Level</value></data>
+  <data name="ShellMenuOriginalCommand" xml:space="preserve"><value>Original command</value></data>
+  <data name="ShellMenuConvertedPreview" xml:space="preserve"><value>Converted preview</value></data>
+  <data name="ShellMenuReason" xml:space="preserve"><value>Reason</value></data>
+  <data name="ShellMenuAcceptRisk" xml:space="preserve"><value>Accept risk</value></data>
+  <data name="ShellMenuDirect" xml:space="preserve"><value>Direct</value></data>
+  <data name="ShellMenuNeedsReview" xml:space="preserve"><value>Needs review</value></data>
+  <data name="ShellMenuUnsupported" xml:space="preserve"><value>Unsupported</value></data>
+  <data name="ShellMenuScanDiagnostic" xml:space="preserve"><value>Scan diagnostic</value></data>
+  <data name="ShellMenuReasonAmbiguousExecutable" xml:space="preserve"><value>The executable path is ambiguous.</value></data>
+  <data name="ShellMenuReasonArgumentsUnparseable" xml:space="preserve"><value>The command arguments cannot be parsed safely.</value></data>
+  <data name="ShellMenuReasonCascadeCycle" xml:space="preserve"><value>The submenu contains a cycle.</value></data>
+  <data name="ShellMenuReasonCascadeDepth" xml:space="preserve"><value>The submenu exceeds the supported depth.</value></data>
+  <data name="ShellMenuReasonCascadeMissing" xml:space="preserve"><value>The submenu target is missing.</value></data>
+  <data name="ShellMenuReasonCommandEmpty" xml:space="preserve"><value>The registered command is empty.</value></data>
+  <data name="ShellMenuReasonCommandMissing" xml:space="preserve"><value>No static command is registered.</value></data>
+  <data name="ShellMenuReasonConditionalVisibilityUnresolved" xml:space="preserve"><value>Explorer uses a visibility condition that cannot be reproduced.</value></data>
+  <data name="ShellMenuReasonDangerousHost" xml:space="preserve"><value>The command uses a system or scripting host and requires confirmation.</value></data>
+  <data name="ShellMenuReasonDynamicCom" xml:space="preserve"><value>This command is provided dynamically by a COM extension.</value></data>
+  <data name="ShellMenuReasonDynamicHandler" xml:space="preserve"><value>This association uses a dynamic context-menu handler.</value></data>
+  <data name="ShellMenuReasonElevationSensitive" xml:space="preserve"><value>The command requests elevation.</value></data>
+  <data name="ShellMenuReasonExecutableMissing" xml:space="preserve"><value>The executable cannot be resolved.</value></data>
+  <data name="ShellMenuReasonExecutableQuoteUnclosed" xml:space="preserve"><value>The executable path has an unclosed quote.</value></data>
+  <data name="ShellMenuReasonHiddenByRegistration" xml:space="preserve"><value>The command is hidden by its Explorer registration.</value></data>
+  <data name="ShellMenuReasonMultiplePlaceholders" xml:space="preserve"><value>The command contains multiple path placeholders.</value></data>
+  <data name="ShellMenuReasonNotStatic" xml:space="preserve"><value>This is not a static command.</value></data>
+  <data name="ShellMenuReasonRoundTripMismatch" xml:space="preserve"><value>The converted arguments would change the original command.</value></data>
+  <data name="ShellMenuReasonScriptHost" xml:space="preserve"><value>The command launches a script and requires confirmation.</value></data>
+  <data name="ShellMenuReasonShiftOnly" xml:space="preserve"><value>Explorer normally shows this command only while Shift is held.</value></data>
+  <data name="ShellMenuReasonSourceIncomplete" xml:space="preserve"><value>One or more registry sources could not be read.</value></data>
+  <data name="ShellMenuReasonUnsupportedExecutable" xml:space="preserve"><value>The executable type is not supported for direct import.</value></data>
+  <data name="ShellMenuReasonUnsupportedPlaceholder" xml:space="preserve"><value>The command contains an unsupported placeholder.</value></data>
+  <data name="ShellMenuReasonViewConflict" xml:space="preserve"><value>The 32-bit and 64-bit registrations conflict.</value></data>
+  <data name="ShellMenuReasonEnvironmentUnresolved" xml:space="preserve"><value>An environment variable could not be resolved.</value></data>
+  <data name="ShellMenuReasonCascadeReadFailed" xml:space="preserve"><value>A referenced submenu could not be read.</value></data>
+  <data name="ShellMenuReasonDde" xml:space="preserve"><value>This command depends on legacy DDE behavior.</value></data>
+  <data name="ShellMenuReasonIndirectTitleUnresolved" xml:space="preserve"><value>The localized menu title could not be resolved.</value></data>
+  <data name="ShellMenuReasonScopePlaceholderMismatch" xml:space="preserve"><value>The path placeholder does not match this menu scope.</value></data>
+  <data name="ShellMenuOnlyExistingExecutables" xml:space="preserve"><value>Only existing executables</value></data>
+  <data name="ShellMenuCreateCopy" xml:space="preserve"><value>Create copy</value></data>
+  <data name="ShellMenuExpandedCommand" xml:space="preserve"><value>Expanded command</value></data>
+  <data name="ShellMenuParsedExecutable" xml:space="preserve"><value>Parsed executable</value></data>
+  <data name="ShellMenuParsedArguments" xml:space="preserve"><value>Parsed arguments</value></data>
+  <data name="ShellMenuPlaceholderDetails" xml:space="preserve"><value>Placeholder details</value></data>
+  <data name="ShellMenuScanSummaryFormat" xml:space="preserve"><value>{0} candidates, {1} diagnostics</value></data>
+  <data name="ShellMenuResultsNotCurrent" xml:space="preserve"><value>No current scan results</value></data>
+  <data name="ShellMenuScanSummaryCompleteFormat" xml:space="preserve"><value>{0} candidates across {1} scanned scopes; {2} diagnostics</value></data>
+  <data name="ShellMenuScanSummaryPartialFormat" xml:space="preserve"><value>Partial: {0} candidates across {1} scanned scopes; {2} read failures; {3} diagnostics</value></data>
+  <data name="InvokeShellHandler" xml:space="preserve"><value>Invoke shell extension</value></data>
+  <data name="ShellMenuShellBridge" xml:space="preserve"><value>Shell bridge</value></data>
+  <data name="ShellMenuReasonShellBridge" xml:space="preserve"><value>Runs through the real Explorer shell extension (may show a submenu).</value></data>
+  <data name="ShellMenuReasonHandlerClsidMissing" xml:space="preserve"><value>The shell extension CLSID is missing or invalid.</value></data>
+</root>

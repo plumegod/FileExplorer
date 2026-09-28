@@ -1,0 +1,57 @@
+﻿<dxe:ButtonEdit x:Class="FileExplorer.Controls.ExpressionEditorControl"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors">
+
+    <dxe:ButtonEdit.Template>
+        <ControlTemplate TargetType="dxe:ButtonEdit">
+            <Grid>
+                <dxg:GridControl x:Name="Grid" Width="0" Height="0">
+                    <dxg:GridControl.Columns>
+                        <dxg:GridColumn FieldName="RowNumber" Header="{Binding Row, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="Name" Header="{Binding Name, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="Description" Header="{Binding Type, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="Extension" Header="{Binding Extension, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="ParentName" Header="{Binding ParentName, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="ParentPath" Header="{Binding ParentPath, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="FullPath" Header="{Binding Path, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="Size" Header="{Binding Size, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="DateCreated" Header="{Binding DateCreated, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="DateModified" Header="{Binding DateModified, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="DateAccessed" Header="{Binding DateAccessed, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="Width" Header="{Binding FrameWidth, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="Height" Header="{Binding FrameHeight, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="Duration" Header="{Binding Duration, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="AudioBitrate" Header="{Binding AudioBitrate, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="AudioChannels" Header="{Binding AudioChannels, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="AudioSampleRate" Header="{Binding AudioSampleRate, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="Album" Header="{Binding Album, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="Title" Header="{Binding Title, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="Genre" Header="{Binding Genre, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="AlbumArtists" Header="{Binding AlbumArtists, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="ContributingArtists" Header="{Binding ContributingArtists, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="Composers" Header="{Binding Composers, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="Year" Header="{Binding Year, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="Track" Header="{Binding Track, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="TrackCount" Header="{Binding TrackCount, Source={StaticResource ResourceProvider}}" />
+                        <dxg:GridColumn FieldName="Unbound" AllowUnboundExpressionEditor="True" 
+                                        UnboundExpression="{Binding EditValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource TemplatedParent}}" />
+                    </dxg:GridControl.Columns>
+                </dxg:GridControl>
+                <dxe:ButtonEdit IsTextEditable="False" AllowDefaultButton="False" EditValue="{Binding Columns[Unbound].UnboundExpression, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=Grid}"
+                                ButtonsSource="{Binding Buttons, RelativeSource={RelativeSource TemplatedParent}}">
+                    <dxe:ButtonEdit.ButtonTemplate>
+                        <DataTemplate>
+                            <dxe:ButtonInfo GlyphKind="{Binding GlyphKind}" Command="{Binding Command}" />
+                        </DataTemplate>
+                    </dxe:ButtonEdit.ButtonTemplate>
+                    <dxe:ButtonEdit.Buttons>
+                        <dxe:ButtonInfo GlyphKind="Edit" Command="{Binding View.Commands.ShowUnboundExpressionEditor, ElementName=Grid}" CommandParameter="{Binding Columns[Unbound], ElementName=Grid}" />
+                    </dxe:ButtonEdit.Buttons>
+                </dxe:ButtonEdit>
+            </Grid>
+        </ControlTemplate>
+    </dxe:ButtonEdit.Template>
+
+</dxe:ButtonEdit>

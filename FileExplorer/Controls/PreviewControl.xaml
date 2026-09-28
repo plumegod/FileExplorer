@@ -1,0 +1,35 @@
+﻿<ContentControl x:Class="FileExplorer.Controls.PreviewControl"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                xmlns:common="clr-namespace:FileExplorer.Core"
+                x:Name="CodeBehind" DataContext="{Binding ElementName=CodeBehind}">
+
+    <ContentControl.Content>
+        <Binding Path="ActiveExtension" />
+    </ContentControl.Content>
+
+    <ContentControl.Visibility>
+        <Binding Path="File.IsDirectory" FallbackValue="Collapsed" Converter="{dxmvvm:BooleanToVisibilityConverter Inverse=True}" />
+    </ContentControl.Visibility>
+
+    <ContentControl.Template>
+        <ControlTemplate TargetType="ContentControl">
+            <Grid>
+                <Button HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ErrorCommand}">
+                    <Button.Visibility>
+                        <MultiBinding Converter="{common:MultiBooleanToVisibilityConverter Condition=And}">
+                            <Binding Path="Message" Converter="{dxmvvm:StringToBooleanConverter}" />
+                            <Binding Path="ActiveExtension" Converter="{dxmvvm:ObjectToBooleanConverter Inverse=True}" />
+                        </MultiBinding>
+                    </Button.Visibility>
+                    <TextBlock Margin="3,6" FontSize="14" TextWrapping="Wrap" Text="{Binding Message}" />
+                </Button>
+                <dx:WaitIndicator DeferedVisibility="{Binding Loading, Mode=OneWay}" />
+                <ContentPresenter />
+            </Grid>
+        </ControlTemplate>
+    </ContentControl.Template>
+
+</ContentControl>

@@ -1,0 +1,74 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net4.8</TargetFramework>
+	<LangVersion>latest</LangVersion>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Backward.svg" />
+    <None Remove="Assets\Eject.svg" />
+    <None Remove="Assets\Forward.svg" />
+    <None Remove="Assets\Mute.svg" />
+    <None Remove="Assets\Pause.svg" />
+    <None Remove="Assets\Play.svg" />
+    <None Remove="Assets\Settings.svg" />
+    <None Remove="Assets\Stop.svg" />
+    <None Remove="Assets\Volume.svg" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\FileExplorer.Common\FileExplorer.Common.csproj" />
+    <ProjectReference Include="..\FileExplorer.Extension\FileExplorer.Extension.csproj" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <PackageReference Include="DevExpress.Wpf" Version="$(DevExpressVersion)">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="TagLibSharp" Version="2.3.0" />
+    <PackageReference Include="WPFMediaKit" Version="2.3.0" />
+  </ItemGroup>
+	
+  <ItemGroup>
+	<Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.ComponentModel.Composition" />
+	<Reference Include="System.Web" />
+	<Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <Resource Include="Assets\Backward.svg" />
+    <Resource Include="Assets\Eject.svg" />
+    <Resource Include="Assets\Forward.svg" />
+    <Resource Include="Assets\Mute.svg" />
+    <Resource Include="Assets\Pause.svg" />
+    <Resource Include="Assets\Play.svg" />
+    <Resource Include="Assets\Settings.svg" />
+    <Resource Include="Assets\Stop.svg" />
+    <Resource Include="Assets\Volume.svg" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+	  <DesignTime>True</DesignTime>
+	  <AutoGen>True</AutoGen>
+	  <DependentUpon>Resources.resx</DependentUpon>
+	</Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+	
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy /y &quot;$(TargetDir)*.dll&quot; &quot;$(SolutionDir)FileExplorer\bin\$(ConfigurationName)\$(TargetFramework)\PreviewExtensions\$(ProjectName)\&quot;" />
+    <Exec Command="xcopy /y /i &quot;$(TargetDir)de&quot; &quot;$(SolutionDir)FileExplorer\bin\$(ConfigurationName)\$(TargetFramework)\PreviewExtensions\$(ProjectName)\de&quot;" />
+    <Exec Command="xcopy /y /i &quot;$(TargetDir)tr&quot; &quot;$(SolutionDir)FileExplorer\bin\$(ConfigurationName)\$(TargetFramework)\PreviewExtensions\$(ProjectName)\tr&quot;" />  
+  </Target>
+
+</Project>

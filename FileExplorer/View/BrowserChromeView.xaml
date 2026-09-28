@@ -1,0 +1,522 @@
+<UserControl x:Class="FileExplorer.View.BrowserChromeView"
+             x:Name="FileList"
+             IsEnabled="{Binding IsMaterialized}"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxfui="http://schemas.devexpress.com/winfx/2008/xaml/core/filteringui"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:main="clr-namespace:FileExplorer"
+             xmlns:common="clr-namespace:FileExplorer.Core"
+             xmlns:controls="clr-namespace:FileExplorer.Controls">
+    <DockPanel>
+            <dxr:RibbonControl DockPanel.Dock="Top" RibbonTitleBarVisibility="Collapsed" RibbonStyle="Office2019" ToolbarShowMode="Hide"
+                               ShowApplicationButton="False" AllowCustomization="False" AllowKeyTips="False"
+                               IsSimplified="{Binding Settings.SimplifiedRibbon, Mode=TwoWay}" IsMinimized="{Binding Settings.MinimizedRibbon, Mode=TwoWay}">
+                <dxr:RibbonControl.PageHeaderItems>
+                    <dxb:BarStaticItem>
+                        <dxb:BarStaticItem.ContentTemplate>
+                            <DataTemplate>
+                                <TextBlock FontSize="14" FontWeight="Light" Style="{StaticResource IconText}" Text="{Binding}" />
+                            </DataTemplate>
+                        </dxb:BarStaticItem.ContentTemplate>
+                        <dxb:BarStaticItem.Style>
+                            <Style TargetType="dxb:BarStaticItem">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding UpdateStatus, Source={x:Static main:App.PackageManager}}" Value="ReadyToDownload">
+                                        <Setter Property="Content" Value="&#xF05A;" />
+                                        <Setter Property="ToolTip" Value="{Binding UpdateAvailable, Source={StaticResource ResourceProvider}}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding UpdateStatus, Source={x:Static main:App.PackageManager}}" Value="DownloadInProgress">
+                                        <Setter Property="Content" Value="&#xF019;" />
+                                        <Setter Property="ToolTip" Value="{Binding DownloadInProgress, Source={StaticResource ResourceProvider}}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding UpdateStatus, Source={x:Static main:App.PackageManager}}" Value="ReadyToInstall">
+                                        <Setter Property="Content" Value="&#xF011;" />
+                                        <Setter Property="ToolTip" Value="{Binding RestartRequired, Source={StaticResource ResourceProvider}}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </dxb:BarStaticItem.Style>
+                    </dxb:BarStaticItem>
+                    <dxb:BarButtonItem RibbonStyle="SmallWithoutText" Content="{Binding Update, Source={StaticResource ResourceProvider}}" Command="{Binding DownloadUpdateCommand}"
+                                       IsVisible="{Binding UpdateStatus, Source={x:Static main:App.PackageManager}, Converter={common:EnumToBooleanConverter TrueValue={x:Static common:UpdateStatus.ReadyToDownload}}}" />
+                    <dxb:BarButtonItem RibbonStyle="SmallWithoutText" Content="{Binding Restart, Source={StaticResource ResourceProvider}}" Command="{Binding InstallUpdateCommand}"
+                                       IsVisible="{Binding UpdateStatus, Source={x:Static main:App.PackageManager}, Converter={common:EnumToBooleanConverter TrueValue={x:Static common:UpdateStatus.ReadyToInstall}}}" />
+                    <dxb:BarEditItem EditWidth="150" EditValue="{Binding DownloadPercentage, Mode=OneWay, Source={x:Static main:App.PackageManager}}"
+                                     IsVisible="{Binding UpdateStatus, Source={x:Static main:App.PackageManager}, Converter={common:EnumToBooleanConverter TrueValue={x:Static common:UpdateStatus.DownloadInProgress}}}">
+                        <dxb:BarEditItem.EditSettings>
+                            <dxe:ProgressBarEditSettings IsPercent="True" Minimum="0" Maximum="1" ContentDisplayMode="Value" DisplayFormat="Downloading: {0:P0}" />
+                        </dxb:BarEditItem.EditSettings>
+                    </dxb:BarEditItem>
+                    <dxb:BarButtonItem Glyph="{dx:DXImage 'SvgImages/Icon Builder/Actions_Refresh.svg'}" ToolTip="{Binding Update, Source={StaticResource ResourceProvider}}"
+                                       IsVisible="{Binding UpdateStatus, Source={x:Static main:App.PackageManager}, Converter={common:EnumToBooleanConverter TrueValue={x:Static common:UpdateStatus.UpToDate}}}"
+                                       Command="{Binding CheckForUpdatesCommand}" CommandParameter="true">
+                        <dx:WpfSvgPalette.Palette>
+                            <dx:WpfSvgPalette>
+                                <SolidColorBrush x:Key="Green" Color="DodgerBlue" />
+                            </dx:WpfSvgPalette>
+                        </dx:WpfSvgPalette.Palette>
+                    </dxb:BarButtonItem>
+                </dxr:RibbonControl.PageHeaderItems>
+                <dxr:RibbonDefaultPageCategory>
+                    <dxr:RibbonPage Caption="{Binding Home, Source={StaticResource ResourceProvider}}"
+                                    IsEnabled="{Binding ActiveFileList.View.IsEditing, ElementName=FileList, Converter={dxmvvm:BooleanNegationConverter}}">
+                        <dxr:RibbonPageGroup Caption="{Binding Clipboard, Source={StaticResource ResourceProvider}}">
+                            <dxb:BarButtonItem x:Name="PinToQuickAccess" Content="{Binding PinToQuickAccess, Source={StaticResource ResourceProvider}}"
+                                               Command="{Binding PinToQuickAccessCommand}" CommandParameter="{Binding ActiveFileList.SelectedItem, ElementName=FileList}"
+                                               IsVisible="{Binding IsEnabled, RelativeSource={RelativeSource Self}}"
+                                               common:IconGlyph.Source="Pin" />
+                            <dxb:BarButtonItem x:Name="UnpinFromQuickAccess" Content="{Binding UnpinFromQuickAccess, Source={StaticResource ResourceProvider}}"
+                                               Command="{Binding UnpinFromQuickAccessCommand}" CommandParameter="{Binding ActiveFileList.SelectedItem, ElementName=FileList}"
+                                               IsVisible="{Binding IsEnabled, RelativeSource={RelativeSource Self}}"
+                                               common:IconGlyph.Source="Unpin" />
+                            <dxb:BarButtonItem x:Name="Copy" Content="{Binding Copy, Source={StaticResource ResourceProvider}}" KeyGesture="Ctrl+C"
+                                               Command="{Binding CopyToClipboardCommand}" CommandParameter="{Binding ActiveFileList.SelectedItems, ElementName=FileList}"
+                                               common:IconGlyph.Source="Copy" />
+                            <dxb:BarButtonItem x:Name="Paste" Content="{Binding Paste, Source={StaticResource ResourceProvider}}" KeyGesture="Ctrl+V"
+                                               Command="{Binding PasteFromClipboardCommand}" CommandParameter="{Binding ActiveFileList.SelectedItem, ElementName=FileList}"
+                                               common:IconGlyph.Source="Paste" />
+                            <dxb:BarButtonItem x:Name="Cut" Content="{Binding Cut, Source={StaticResource ResourceProvider}}" KeyGesture="Ctrl+X"
+                                               Command="{Binding CutToClipboardCommand}" CommandParameter="{Binding ActiveFileList.SelectedItems, ElementName=FileList}"
+                                               GlyphSize="Small" common:IconGlyph.Source="Cut" />
+                            <dxb:BarButtonItem x:Name="CopyPath" Content="{Binding CopyPath, Source={StaticResource ResourceProvider}}"
+                                               Command="{Binding CopyPathToClipboardCommand}" CommandParameter="{Binding ActiveFileList.SelectedItems, ElementName=FileList}"
+                                               GlyphSize="Small" common:IconGlyph.Source="CopyPath" />
+                        </dxr:RibbonPageGroup>
+                        <dxr:RibbonPageGroup Caption="{Binding Organize, Source={StaticResource ResourceProvider}}">
+                            <dxb:BarSubItem x:Name="MoveTo" Content="{Binding MoveTo, Source={StaticResource ResourceProvider}}"
+                                            ItemLinksSource="{Binding QuickAccess.Folders}" common:IconGlyph.Source="MoveTo">
+                                <dxb:BarSubItem.ItemTemplate>
+                                    <DataTemplate>
+                                        <ContentControl>
+                                            <dxb:BarButtonItem Content="{Binding Name}" Glyph="{Binding SmallIcon}" ToolTip="{Binding FullPath}" CommandParameter="{Binding ActiveFileList.SelectedItems, ElementName=FileList}"
+                                                               Command="{DXCommand Execute='@ElementName(FileList).ActiveFileList.DataContext.MoveToItems(@ElementName(FileList).ActiveFileList.SelectedItems, FullPath)', 
+                                                                                CanExecute='@ElementName(FileList).ActiveFileList.DataContext.CanMoveToItems(@ElementName(FileList).ActiveFileList.SelectedItems)'}" />
+                                        </ContentControl>
+                                    </DataTemplate>
+                                </dxb:BarSubItem.ItemTemplate>
+                            </dxb:BarSubItem>
+                            <dxb:BarSubItem x:Name="CopyTo" Content="{Binding CopyTo, Source={StaticResource ResourceProvider}}"
+                                            ItemLinksSource="{Binding QuickAccess.Folders}" common:IconGlyph.Source="CopyTo">
+                                <dxb:BarSubItem.ItemTemplate>
+                                    <DataTemplate>
+                                        <ContentControl>
+                                            <dxb:BarButtonItem Content="{Binding Name}" Glyph="{Binding SmallIcon}" ToolTip="{Binding FullPath}" CommandParameter="{Binding ActiveFileList.SelectedItems, ElementName=FileList}"
+                                                               Command="{DXCommand Execute='@ElementName(FileList).ActiveFileList.DataContext.CopyToItems(@ElementName(FileList).ActiveFileList.SelectedItems, FullPath)', 
+                                                                                CanExecute='@ElementName(FileList).ActiveFileList.DataContext.CanCopyToItems(@ElementName(FileList).ActiveFileList.SelectedItems)'}" />
+                                        </ContentControl>
+                                    </DataTemplate>
+                                </dxb:BarSubItem.ItemTemplate>
+                            </dxb:BarSubItem>
+                            <dxb:BarItemSeparator />
+                            <dxb:BarSplitButtonItem x:Name="Delete" Content="{Binding Delete, Source={StaticResource ResourceProvider}}" KeyGesture="Ctrl+D"
+                                                    Command="{Binding RecycleItemsCommand}" CommandParameter="{Binding ActiveFileList.SelectedItems, ElementName=FileList}"
+                                                    common:IconGlyph.Source="Delete">
+                                <dxb:PopupMenu>
+                                    <dxb:BarButtonItem Content="{Binding Recycle, Source={StaticResource ResourceProvider}}" KeyGesture="Delete"
+                                                       Command="{Binding RecycleItemsCommand}" CommandParameter="{Binding ActiveFileList.SelectedItems, ElementName=FileList}"
+                                                       IsEnabled="{DXBinding 'CurrentFolder.FullPath.StartsWith(`\\\\`) == false'}"
+                                                       common:IconGlyph.Source="Recycle" />
+                                    <dxb:BarButtonItem Content="{Binding PermanentlyDelete, Source={StaticResource ResourceProvider}}" KeyGesture="Shift+Delete"
+                                                       Command="{Binding DeleteItemsCommand}" CommandParameter="{Binding ActiveFileList.SelectedItems, ElementName=FileList}" 
+                                                       common:IconGlyph.Source="Delete" />
+                                </dxb:PopupMenu>
+                            </dxb:BarSplitButtonItem>
+                            <dxb:BarButtonItem x:Name="Rename" Content="{Binding Rename, Source={StaticResource ResourceProvider}}" KeyGesture="F2"
+                                               Command="{Binding ActiveFileList.EditCommand, ElementName=FileList}" CommandParameter="{Binding ActiveFileList.SelectedItems, ElementName=FileList}"
+                                               common:IconGlyph.Source="Rename" />
+                        </dxr:RibbonPageGroup>
+                        <dxr:RibbonPageGroup Caption="{Binding New, Source={StaticResource ResourceProvider}}">
+                            <dxb:BarButtonItem x:Name="NewFolder" Content="{Binding NewFolder, Source={StaticResource ResourceProvider}}"
+                                               Command="{Binding CreateNewFolderCommand}" CommandParameter="{Binding ActiveFileList.SelectedItem, ElementName=FileList}" KeyGesture="Ctrl+Shift+N"
+                                               common:IconGlyph.Source="NewFolder" />
+                            <dxb:BarButtonItem x:Name="NewFile" Content="{Binding NewFile, Source={StaticResource ResourceProvider}}"
+                                               Command="{Binding CreateNewFileCommand}" CommandParameter="{Binding ActiveFileList.SelectedItem, ElementName=FileList}"
+                                               common:IconGlyph.Source="NewFile" />
+                            <dxb:BarButtonItem x:Name="Mail" Content="{Binding Mail, Source={StaticResource ResourceProvider}}"
+                                               Command="{Binding SendAsEmailCommand}" CommandParameter="{Binding ActiveFileList.SelectedItems, ElementName=FileList}"
+                                               common:IconGlyph.Source="Mail" />
+                            <dxb:BarButtonItem x:Name="Zip" Content="{Binding Zip, Source={StaticResource ResourceProvider}}"
+                                               Command="{Binding ZipItemsCommand}" CommandParameter="{Binding ActiveFileList.SelectedItems, ElementName=FileList}"
+                                               IsVisible="{Binding IsEnabled, RelativeSource={RelativeSource Self}}"
+                                               common:IconGlyph.Source="Zip" />
+                            <dxb:BarButtonItem x:Name="Unzip" Content="{Binding Unzip, Source={StaticResource ResourceProvider}}"
+                                               Command="{Binding UnzipCommand}" CommandParameter="{Binding ActiveFileList.SelectedItem, ElementName=FileList}"
+                                               IsVisible="{Binding IsEnabled, RelativeSource={RelativeSource Self}}"
+                                               common:IconGlyph.Source="Zip" />
+                        </dxr:RibbonPageGroup>
+                        <dxr:RibbonPageGroup Caption="{Binding Open, Source={StaticResource ResourceProvider}}">
+                            <dxr:RibbonPageGroup.Resources>
+                                <BitmapImage x:Key="DefaultOpenIcon" common:IconGlyph.Source="Open" />
+                            </dxr:RibbonPageGroup.Resources>
+                            <dxb:BarButtonItem x:Name="Properties" Content="{Binding Properties, Source={StaticResource ResourceProvider}}" KeyGesture="Alt+Enter"
+                                               Command="{Binding ShowPropertiesCommand}" CommandParameter="{Binding ActiveFileList.SelectedItems, ElementName=FileList}"
+                                               common:IconGlyph.Source="Properties" />
+                            <dxb:BarButtonItem x:Name="Open" Content="{Binding Open, Source={StaticResource ResourceProvider}}" KeyGesture="Enter"
+                                               Command="{Binding OpenItemCommand}" CommandParameter="{Binding ActiveFileList.SelectedItem, ElementName=FileList}"
+                                               Glyph="{Binding ActiveFileList.SelectedItem.SmallIcon, ElementName=FileList, FallbackValue={StaticResource DefaultOpenIcon}}" />
+                            <dxb:BarButtonItem x:Name="OpenInNewTab" Content="{Binding OpenInNewTab, Source={StaticResource ResourceProvider}}" KeyGesture="Shift+Enter"
+                                               Command="{Binding OpenInNewTabCommand}" CommandParameter="{Binding ActiveFileList.SelectedItem, ElementName=FileList}"
+                                               GlyphSize="Small" common:IconGlyph.Source="OpenFolder" />
+                            <dxb:BarButtonItem x:Name="OpenInNewWindow" Content="{Binding OpenInNewWindow, Source={StaticResource ResourceProvider}}" KeyGesture="Ctrl+Enter"
+                                               Command="{Binding OpenInNewWindowCommand}" CommandParameter="{Binding ActiveFileList.SelectedItem, ElementName=FileList}"
+                                               GlyphSize="Small" common:IconGlyph.Source="OpenNewWindow" />
+                        </dxr:RibbonPageGroup>
+                        <dxr:RibbonPageGroup Caption="{Binding Select, Source={StaticResource ResourceProvider}}">
+                            <dxb:BarButtonItem Content="{Binding SelectAll, Source={StaticResource ResourceProvider}}" 
+                                               Command="{DXCommand '@ElementName(FileList).ActiveFileList.SelectAll()'}"
+                                               GlyphSize="Small" common:IconGlyph.Source="SelectAll" />
+                            <dxb:BarButtonItem Content="{Binding SelectNone, Source={StaticResource ResourceProvider}}"
+                                               Command="{DXCommand '@ElementName(FileList).ActiveFileList.UnselectAll()'}"
+                                               GlyphSize="Small" common:IconGlyph.Source="SelectNone" />
+                            <dxb:BarButtonItem Content="{Binding InvertSelection, Source={StaticResource ResourceProvider}}" 
+                                               Command="{DXCommand '@ElementName(FileList).ActiveFileList.InvertSelection()'}"
+                                               GlyphSize="Small" common:IconGlyph.Source="InvertSelection" />
+                        </dxr:RibbonPageGroup>
+                        <dxr:RibbonPageGroup>
+                            <dxb:BarButtonItem Content="{Binding Options, Source={StaticResource ResourceProvider}}" Command="{Binding ShowOptionsCommand}"
+                                               common:IconGlyph.Source="Options" />
+                            <dxb:BarButtonItem Content="{Binding Extensions, Source={StaticResource ResourceProvider}}" Command="{Binding ShowExtensionsCommand}"
+                                               common:IconGlyph.Source="Extensions" />
+                            <dxb:BarItemSeparator />
+                            <dxb:BarButtonItem Content="{Binding Help, Source={StaticResource ResourceProvider}}" Command="{Binding ShowHelpCommand}"
+                                               common:IconGlyph.Source="Help" />
+                        </dxr:RibbonPageGroup>
+                    </dxr:RibbonPage>
+                    <dxr:RibbonPage Caption="{Binding View, Source={StaticResource ResourceProvider}}">
+                        <dxr:RibbonPageGroup Caption="{Binding Panes, Source={StaticResource ResourceProvider}}">
+                            <dxb:BarSplitButtonItem Content="{Binding NavigationPane, Source={StaticResource ResourceProvider}}" ActAsDropDown="True"
+                                                    common:IconGlyph.Source="NavigationPane" >
+                                <dxb:PopupMenu>
+                                    <dxb:BarCheckItem Content="{Binding ShowNavigationPane, Source={StaticResource ResourceProvider}}" IsChecked="{Binding Settings.ShowNavigationPane}" />
+                                    <dxb:BarCheckItem Content="{Binding ExpandToOpenFolder, Source={StaticResource ResourceProvider}}" IsChecked="{Binding Settings.ExpandFocusedNode}" />
+                                </dxb:PopupMenu>
+                            </dxb:BarSplitButtonItem>
+                            <dxb:BarCheckItem Content="{Binding PreviewPane, Source={StaticResource ResourceProvider}}" IsChecked="{Binding Settings.ShowPreviewPane}"
+                                              GlyphSize="Small" common:IconGlyph.Source="PreviewPane" />
+                            <dxb:BarCheckItem Content="{Binding DetailsPane, Source={StaticResource ResourceProvider}}" IsChecked="{Binding Settings.ShowDetailsPane}"
+                                              GlyphSize="Small" common:IconGlyph.Source="DetailsPane" />
+                        </dxr:RibbonPageGroup>
+                        <dxr:RibbonPageGroup Caption="{Binding Layout, Source={StaticResource ResourceProvider}}">
+                            <dxr:RibbonGalleryBarItem DropDownGalleryEnabled="False" Content="{Binding Layout, Source={StaticResource ResourceProvider}}">
+                                <dxr:RibbonGalleryBarItem.Gallery>
+                                    <dxb:Gallery ColCount="3" AllowFilter="False" IsGroupCaptionVisible="False" ItemGlyphSize="16,16">
+                                        <dxb:GalleryItemGroup>
+                                            <dxb:GalleryItem Command="{DXCommand 'Layout=$common:Layout.ExtraLargeIcons'}" IsChecked="{DXBinding 'Layout==$common:Layout.ExtraLargeIcons'}"
+                                                             Caption="{Binding ExtraLargeIcons, Source={StaticResource ResourceProvider}}" common:IconGlyph.Source="ExtraLargeIcons" />
+                                            <dxb:GalleryItem Command="{DXCommand 'Layout=$common:Layout.LargeIcons'}" IsChecked="{DXBinding 'Layout==$common:Layout.LargeIcons'}"
+                                                             Caption="{Binding LargeIcons, Source={StaticResource ResourceProvider}}" common:IconGlyph.Source="LargeIcons" />
+                                            <dxb:GalleryItem Command="{DXCommand 'Layout=$common:Layout.MediumIcons'}" IsChecked="{DXBinding 'Layout==$common:Layout.MediumIcons'}"
+                                                             Caption="{Binding MediumIcons, Source={StaticResource ResourceProvider}}" common:IconGlyph.Source="MediumIcons" />
+                                            <dxb:GalleryItem Command="{DXCommand 'Layout=$common:Layout.SmallIcons'}" IsChecked="{DXBinding 'Layout==$common:Layout.SmallIcons'}"
+                                                             Caption="{Binding SmallIcons, Source={StaticResource ResourceProvider}}" common:IconGlyph.Source="SmallIcons" />
+                                            <dxb:GalleryItem Command="{DXCommand 'Layout=$common:Layout.List'}" IsChecked="{DXBinding 'Layout==$common:Layout.List'}"
+                                                             Caption="{Binding List, Source={StaticResource ResourceProvider}}" common:IconGlyph.Source="List" />
+                                            <dxb:GalleryItem Command="{DXCommand 'Layout=$common:Layout.Details'}" IsChecked="{DXBinding 'Layout==$common:Layout.Details'}"
+                                                             Caption="{Binding Details, Source={StaticResource ResourceProvider}}" common:IconGlyph.Source="Details" />
+                                            <dxb:GalleryItem Command="{DXCommand 'Layout=$common:Layout.Content'}" IsChecked="{DXBinding 'Layout==$common:Layout.Content'}"
+                                                             Caption="{Binding Content, Source={StaticResource ResourceProvider}}" common:IconGlyph.Source="Content" />
+                                            <dxb:GalleryItem Command="{DXCommand 'Layout=$common:Layout.Thumbnails'}" IsChecked="{DXBinding 'Layout==$common:Layout.Thumbnails'}"
+                                                             Caption="{Binding Thumbnails, Source={StaticResource ResourceProvider}}" common:IconGlyph.Source="Thumbnails" />
+                                    </dxb:GalleryItemGroup>
+                                </dxb:Gallery>
+                            </dxr:RibbonGalleryBarItem.Gallery>
+                            </dxr:RibbonGalleryBarItem>
+                            <dxb:BarCheckItem Content="{Binding ImagePreviews, Source={StaticResource ResourceProvider}}" IsChecked="{Binding Settings.ShowLayoutImagePreviews}"
+                                              GlyphSize="Small" common:IconGlyph.Source="Thumbnails" />
+                            <dxb:BarSubItem Content="{Binding SaveLayout, Source={StaticResource ResourceProvider}}" common:IconGlyph.Source="Save">
+                                <dxb:BarButtonItem Content="{Binding CurrentFolder, Source={StaticResource ResourceProvider}}" common:IconGlyph.Source="NewFolder"
+                                                   Command="{DXCommand '@ElementName(FileList).ActiveFileList.SaveFolderLayout(CurrentFolder.FullPath)', CanExecute='!CurrentFolder.IsRoot'}" />
+                                <dxb:BarButtonItem Content="{Binding AllSubfolders, Source={StaticResource ResourceProvider}}" common:IconGlyph.Source="Content"
+                                                   Command="{DXCommand '@ElementName(FileList).ActiveFileList.SaveFolderLayout(CurrentFolder.FullPath, true)', CanExecute='!CurrentFolder.IsRoot'}" />
+                                <dxb:BarItemSeparator />
+                                <dxb:BarButtonItem Content="{Binding ManageSavedLayouts, Source={StaticResource ResourceProvider}}"
+                                                   Command="{DXCommand '@ElementName(FileList).ActiveFileList.ShowManageLayoutsDialog()'}" />
+                            </dxb:BarSubItem>
+                            <dxb:BarSubItem Content="{Binding LoadLayout, Source={StaticResource ResourceProvider}}"                                            
+                                            ItemLinksSource="{Binding FolderLayouts, Source={x:Static main:App.Repository}}"
+                                            common:IconGlyph.Source="OpenFolder">
+                                <dxb:BarSubItem.ItemTemplate>
+                                    <DataTemplate>
+                                        <ContentControl>
+                                            <dxb:BarButtonItem Content="{Binding Name}" common:IconGlyph.Source="OpenFile"
+                                                               Command="{DXCommand '@ElementName(FileList).ActiveFileList.LoadFolderLayout(FolderPath)'}" />
+                                        </ContentControl>
+                                    </DataTemplate>
+                                </dxb:BarSubItem.ItemTemplate>
+                                <dxb:BarItemSeparator />
+                                <dxb:BarButtonItem Content="{Binding LoadDefaultLayout, Source={StaticResource ResourceProvider}}"
+                                                   Command="{DXCommand '@ElementName(FileList).ActiveFileList.LoadDefaultLayout()'}" />
+                            </dxb:BarSubItem>
+                        </dxr:RibbonPageGroup>
+                        <dxr:RibbonPageGroup Caption="{Binding ShowHide, Source={StaticResource ResourceProvider}}">
+                            <dxb:BarEditItem EditHorizontalAlignment="Left" EditValue="{Binding Settings.ShowFileExtensions}">
+                                <dxb:BarEditItem.EditSettings>
+                                    <dxe:CheckEditSettings Content="{Binding ShowFileExtensions, Source={StaticResource ResourceProvider}}" />
+                                </dxb:BarEditItem.EditSettings>
+                            </dxb:BarEditItem>
+                            <dxb:BarEditItem EditHorizontalAlignment="Left" EditValue="{Binding Settings.ShowHiddenItems}">
+                                <dxb:BarEditItem.EditSettings>
+                                    <dxe:CheckEditSettings Content="{Binding ShowHiddenItems, Source={StaticResource ResourceProvider}}" />
+                                </dxb:BarEditItem.EditSettings>
+                            </dxb:BarEditItem>
+                            <dxb:BarEditItem EditHorizontalAlignment="Left" EditValue="{Binding Settings.ShowSystemItems}">
+                                <dxb:BarEditItem.EditSettings>
+                                    <dxe:CheckEditSettings Content="{Binding ShowSystemItems, Source={StaticResource ResourceProvider}}" />
+                                </dxb:BarEditItem.EditSettings>
+                            </dxb:BarEditItem>
+                            <dxb:BarCheckItem Content="{Binding ShowCheckBoxes, Source={StaticResource ResourceProvider}}"
+                                              IsChecked="{Binding Settings.ShowCheckBoxes}" 
+                                              Glyph="/Assets/SVG/ShowCheckBoxes.svg" LargeGlyph="/Assets/SVG/ShowCheckBoxes.svg" />
+                            <dxb:BarCheckItem Content="{Binding ShowRowNumbers, Source={StaticResource ResourceProvider}}"
+                                              IsChecked="{Binding Settings.ShowRowNumbers}" IsVisible="{DXBinding 'Layout==$common:Layout.Details'}"
+                                              Glyph="/Assets/SVG/ShowRowNumbers.svg" LargeGlyph="/Assets/SVG/ShowRowNumbers.svg" />
+                        </dxr:RibbonPageGroup>
+                        <dxr:RibbonPageGroup Caption="{Binding RowsColumns, Source={StaticResource ResourceProvider}}">
+                            <dxb:BarSubItem Content="{Binding SortBy, Source={StaticResource ResourceProvider}}"
+                                            ItemLinksSource="{Binding ActiveFileList.Columns, ElementName=FileList}" common:IconGlyph.Source="Sort">
+                                <dxb:BarSubItem.ItemTemplate>
+                                    <DataTemplate>
+                                        <dxb:BarLinkContainerItem>
+                                            <dxb:BarItemSeparator IsVisible="{DXBinding 'Tag == `StartNewGroup`'}" />
+                                            <dxb:BarCheckItem Content="{Binding Header}" IsVisible="{Binding ShowInColumnChooser, Mode=OneWay}" IsChecked="{Binding IsSorted, Mode=OneWay}"
+                                                              Glyph="{Binding SortOrder, Converter={StaticResource ColumnSortOrderToIconConverter}}" Command="{Binding Commands.ChangeColumnSortOrder}" />
+                                        </dxb:BarLinkContainerItem>
+                                    </DataTemplate>
+                                </dxb:BarSubItem.ItemTemplate>
+                            </dxb:BarSubItem>
+                            <dxb:BarSubItem Content="{Binding GroupBy, Source={StaticResource ResourceProvider}}"
+                                            ItemLinksSource="{Binding ActiveFileList.Columns, ElementName=FileList}" GlyphSize="Small" common:IconGlyph.Source="Group">
+                                <dxb:BarSubItem.ItemTemplate>
+                                    <DataTemplate>
+                                        <dxb:BarLinkContainerItem>
+                                            <dxb:BarItemSeparator IsVisible="{DXBinding 'Tag == `StartNewGroup`'}" />
+                                            <dxb:BarCheckItem Content="{Binding Header}" IsVisible="{Binding ShowInColumnChooser, Mode=OneWay}" IsChecked="{Binding IsGrouped, Mode=OneWay}" 
+                                                              Command="{DXCommand 'View.DataControl.ToggleGrouping(FieldName)'}" />
+                                        </dxb:BarLinkContainerItem>
+                                    </DataTemplate>
+                                </dxb:BarSubItem.ItemTemplate>
+                            </dxb:BarSubItem>
+                            <dxb:BarSubItem Content="{Binding AddColumn, Source={StaticResource ResourceProvider}}"
+                                            ItemLinksSource="{Binding ActiveFileList.Columns, ElementName=FileList}" GlyphSize="Small" common:IconGlyph.Source="AddColumn">
+                                <dxb:BarSubItem.ItemTemplate>
+                                    <DataTemplate>
+                                        <dxb:BarLinkContainerItem>
+                                            <dxb:BarItemSeparator IsVisible="{DXBinding 'Tag == `StartNewGroup`'}" />
+                                            <dxb:BarCheckItem Content="{Binding Header}" IsVisible="{Binding ShowInColumnChooser, Mode=OneWay}" IsChecked="{Binding Visible}" CloseSubMenuOnClick="False" />
+                                        </dxb:BarLinkContainerItem>
+                                    </DataTemplate>
+                                </dxb:BarSubItem.ItemTemplate>
+                            </dxb:BarSubItem>
+                            <dxb:BarButtonItem Content="{Binding BestFitAllColumns, Source={StaticResource ResourceProvider}}" 
+                                               Command="{Binding ActiveFileList.View.Commands.BestFitColumns, ElementName=FileList}"
+                                               IsEnabled="{Binding Command, RelativeSource={RelativeSource Self}, Converter={dxmvvm:ObjectToBooleanConverter}}"
+                                               GlyphSize="Small" common:IconGlyph.Source="BestFit" />
+                        </dxr:RibbonPageGroup>
+                    </dxr:RibbonPage>
+                    <dxr:RibbonPage Caption="{Binding Themes, Source={StaticResource ResourceProvider}}">
+                        <dxr:RibbonPageGroup Caption="{Binding StandardThemes, Source={StaticResource ResourceProvider}}">
+                            <dxr:RibbonGalleryBarItem Content="{Binding CurrentItem.DisplayName}" Glyph="{Binding CurrentItem.Theme.SvgGlyph}">
+                                <dxmvvm:Interaction.Behaviors>
+                                    <dxr:RibbonGalleryItemThemeSelectorBehavior ThemesCollection="{Binding DataContext.ThemeCollection, RelativeSource={RelativeSource AncestorType=dxr:RibbonControl}}" />
+                                </dxmvvm:Interaction.Behaviors>
+                                <dxr:RibbonGalleryBarItem.Gallery>
+                                    <dxb:Gallery ColCount="4" SizeMode="Both" />
+                                </dxr:RibbonGalleryBarItem.Gallery>
+                            </dxr:RibbonGalleryBarItem>
+                            <dxr:RibbonGalleryBarItem>
+                                <dxmvvm:Interaction.Behaviors>
+                                    <dxr:RibbonGalleryItemThemePaletteSelectorBehavior />
+                                </dxmvvm:Interaction.Behaviors>
+                            </dxr:RibbonGalleryBarItem>
+                        </dxr:RibbonPageGroup>
+                    </dxr:RibbonPage>
+                </dxr:RibbonDefaultPageCategory>
+                <dxr:RibbonPageCategory Caption="{Binding SearchTools, Source={StaticResource ResourceProvider}}" Color="Transparent" Foreground="Red"
+                                        IsVisible="{Binding Text, UpdateSourceTrigger=PropertyChanged, ElementName=SearchEdit, Converter={dxmvvm:StringToBooleanConverter}}">
+                    <dxr:RibbonPage Caption="{Binding SearchFilter, Source={StaticResource ResourceProvider}}"
+                                    dxfui:FilterElement.Context="{Binding ActiveFileList.FilteringContext, ElementName=FileList}">
+                        <dxr:RibbonPageGroup Caption="{Binding Location, Source={StaticResource ResourceProvider}}">
+                            <dxb:BarCheckItem GroupIndex="0" GlyphSize="Small" common:IconGlyph.Source="NewFolder" Content="{Binding CurrentFolder, Source={StaticResource ResourceProvider}}" IsChecked="True" />
+                            <dxb:BarCheckItem GroupIndex="0" GlyphSize="Small" common:IconGlyph.Source="Content" Content="{Binding AllSubfolders, Source={StaticResource ResourceProvider}}" IsChecked="{Binding Settings.DefaultSearch, Converter={common:NumericToBooleanConverter}}" />
+                        </dxr:RibbonPageGroup>
+                        <dxr:RibbonPageGroup Caption="{Binding Filter, Source={StaticResource ResourceProvider}}">
+                            <dxb:BarSplitButtonItem Content="{Binding DateModified, Source={StaticResource ResourceProvider}}"
+                                                    common:IconGlyph.Source="Date" ActAsDropDown="True">
+                                <dxb:BarSplitButtonItem.PopupControl>
+                                    <dxb:PopupControlContainer>
+                                        <dxfui:CheckedTreeListFilterElement Margin="3" FieldName="DateModified" />
+                                    </dxb:PopupControlContainer>
+                                </dxb:BarSplitButtonItem.PopupControl>
+                            </dxb:BarSplitButtonItem>
+                            <dxb:BarSplitButtonItem Content="{Binding DateCreated, Source={StaticResource ResourceProvider}}" ActAsDropDown="True">
+                                <dxb:BarSplitButtonItem.PopupControl>
+                                    <dxb:PopupControlContainer>
+                                        <dxfui:CheckedTreeListFilterElement Margin="3" FieldName="DateCreated" />
+                                    </dxb:PopupControlContainer>
+                                </dxb:BarSplitButtonItem.PopupControl>
+                            </dxb:BarSplitButtonItem>
+                            <dxb:BarSplitButtonItem Content="{Binding DateAccessed, Source={StaticResource ResourceProvider}}" ActAsDropDown="True">
+                                <dxb:BarSplitButtonItem.PopupControl>
+                                    <dxb:PopupControlContainer>
+                                        <dxfui:CheckedTreeListFilterElement Margin="3" FieldName="DateAccessed" />
+                                    </dxb:PopupControlContainer>
+                                </dxb:BarSplitButtonItem.PopupControl>
+                            </dxb:BarSplitButtonItem>
+                            <dxb:BarItemSeparator />
+                            <dxb:BarSplitButtonItem Content="{Binding Type, Source={StaticResource ResourceProvider}}"
+                                                    common:IconGlyph.Source="Kind" ActAsDropDown="True">
+                                <dxb:BarSplitButtonItem.PopupControl>
+                                    <dxb:PopupControlContainer>
+                                        <dxfui:PredefinedFiltersElement Margin="3" FieldName="Extension" />
+                                    </dxb:PopupControlContainer>
+                                </dxb:BarSplitButtonItem.PopupControl>
+                            </dxb:BarSplitButtonItem>
+                            <dxb:BarSplitButtonItem Content="{Binding Size, Source={StaticResource ResourceProvider}}"
+                                                    common:IconGlyph.Source="Size" ActAsDropDown="True">
+                                <dxb:BarSplitButtonItem.PopupControl>
+                                    <dxb:PopupControlContainer>
+                                        <dxfui:PredefinedFiltersElement Margin="3" FieldName="Size" />
+                                    </dxb:PopupControlContainer>
+                                </dxb:BarSplitButtonItem.PopupControl>
+                            </dxb:BarSplitButtonItem>
+                        </dxr:RibbonPageGroup>
+                        <dxr:RibbonPageGroup Caption="{Binding Options, Source={StaticResource ResourceProvider}}">
+                            <dxb:BarButtonItem x:Name="OpenContainingFolder" Content="{Binding OpenContainingFolder, Source={StaticResource ResourceProvider}}"
+                                               Command="{Binding OpenContainingFolderCommand}" CommandParameter="{Binding ActiveFileList.SelectedItem, ElementName=FileList}"
+                                               common:IconGlyph.Source="OpenFolder" />
+                            <dxb:BarButtonItem Content="{Binding Close, Source={StaticResource ResourceProvider}}" Command="{DXCommand 'SearchText = ``'}"
+                                               common:IconGlyph.Source="Delete" />
+                        </dxr:RibbonPageGroup>
+                    </dxr:RibbonPage>
+                </dxr:RibbonPageCategory>
+                <dxr:RibbonPageCategory Caption="{Binding RecycleBin, Source={StaticResource ResourceProvider}}" Color="Transparent"
+                                        IsVisible="{Binding CurrentFolder.IsRecycleBin}">
+                    <dxr:RibbonPage Caption="{Binding RecycleBin, Source={StaticResource ResourceProvider}}">
+                        <dxr:RibbonPageGroup Caption="{Binding Manage, Source={StaticResource ResourceProvider}}">
+                            <dxb:BarButtonItem x:Name="EmptyRecycleBin" Content="{Binding EmptyRecycleBin, Source={StaticResource ResourceProvider}}"
+                                               Command="{Binding EmptyRecycleBinCommand}" common:IconGlyph.Source="EmptyRecycleBin" />
+                            <dxb:BarButtonItem x:Name="RecycleBinProperties" Content="{Binding RecycleBinProperties, Source={StaticResource ResourceProvider}}"
+                                               Command="{Binding ShowRecycleBinPropertiesCommand}" common:IconGlyph.Source="RecycleBinProperties" />
+                            <dxb:BarItemSeparator />
+                        </dxr:RibbonPageGroup>
+                        <dxr:RibbonPageGroup Caption="{Binding Restore, Source={StaticResource ResourceProvider}}">
+                            <dxb:BarButtonItem x:Name="RestoreAll" Content="{Binding RestoreAll, Source={StaticResource ResourceProvider}}"
+                                               Command="{Binding RestoreAllCommand}" common:IconGlyph.Source="RestoreAll" />
+                            <dxb:BarButtonItem x:Name="Restore" Content="{Binding RestoreSelected, Source={StaticResource ResourceProvider}}"
+                                               Command="{Binding RestoreItemsCommand}" CommandParameter="{Binding ActiveFileList.SelectedItems, ElementName=FileList}"
+                                               common:IconGlyph.Source="Restore" />
+                            <dxb:BarItemSeparator />
+                            <dxb:BarButtonItem x:Name="PermanentlyDelete" Content="{Binding PermanentlyDelete, Source={StaticResource ResourceProvider}}"
+                                               Command="{Binding DeleteItemsCommand}" CommandParameter="{Binding ActiveFileList.SelectedItems, ElementName=FileList}"
+                                               common:IconGlyph.Source="Delete" />
+                        </dxr:RibbonPageGroup>
+                    </dxr:RibbonPage>
+                </dxr:RibbonPageCategory>
+                <dxr:RibbonPageCategory IsVisible="False">
+                    <dxr:RibbonPage>
+                        <dxr:RibbonPageGroup>
+                            <dxb:BarButtonItem x:Name="AddRemoveMenuItems" Content="{Binding AddRemoveMenuItems, Source={StaticResource ResourceProvider}}"
+                                               Glyph="/Assets/SVG/AddRemoveMenuItems.svg" LargeGlyph="/Assets/SVG/AddRemoveMenuItems.svg" Command="{DXCommand '@ElementName(FileList).ActiveFileList.ShowCustomMenuDialog()'}" />
+                            <dxb:BarSubItem x:Name="ExpandToLevel" Content="{Binding Expand, Source={StaticResource ResourceProvider}}" common:IconGlyph.Source="Content"
+                                            IsVisible="{DXBinding 'Layout==$common:Layout.Content'}" IsEnabled="{DXBinding '@ElementName(FileList).ActiveFileList.SelectedItem.IsDirectory'}">                               
+                                <dxb:BarButtonItem Content="{DXBinding '@StaticResource(ResourceProvider).Level + ` 1`'}" Command="{DXCommand '@ElementName(FileList).ActiveFileList.View.ExpandToLevelAsync(1)'}" KeyGesture="CTRL + 1" />
+                                <dxb:BarButtonItem Content="{DXBinding '@StaticResource(ResourceProvider).Level + ` 2`'}" Command="{DXCommand '@ElementName(FileList).ActiveFileList.View.ExpandToLevelAsync(2)'}" KeyGesture="CTRL + 2" />
+                                <dxb:BarButtonItem Content="{DXBinding '@StaticResource(ResourceProvider).Level + ` 3`'}" Command="{DXCommand '@ElementName(FileList).ActiveFileList.View.ExpandToLevelAsync(3)'}" KeyGesture="CTRL + 3" />
+                                <dxb:BarButtonItem Content="{DXBinding '@StaticResource(ResourceProvider).Level + ` 4`'}" Command="{DXCommand '@ElementName(FileList).ActiveFileList.View.ExpandToLevelAsync(4)'}" KeyGesture="CTRL + 4" />
+                                <dxb:BarButtonItem Content="{DXBinding '@StaticResource(ResourceProvider).Level + ` 5`'}" Command="{DXCommand '@ElementName(FileList).ActiveFileList.View.ExpandToLevelAsync(5)'}" KeyGesture="CTRL + 5" />
+                            </dxb:BarSubItem>
+                            <dxb:BarSubItem x:Name="Selection" Content="{Binding Selection, Source={StaticResource ResourceProvider}}" common:IconGlyph.Source="SelectAll">
+                                <dxb:BarButtonItem Content="{Binding SaveSelection, Source={StaticResource ResourceProvider}}" Command="{Binding ActiveFileList.SaveSelectionCommand, ElementName=FileList}" />
+                                <dxb:BarButtonItem Content="{Binding RestoreSelection, Source={StaticResource ResourceProvider}}" Command="{Binding ActiveFileList.RestoreSelectionCommand, ElementName=FileList}" />
+                                <dxb:BarCheckItem Content="{Binding AutoRestoreSelection, Source={StaticResource ResourceProvider}}" IsChecked="{Binding ActiveFileList.LocalSettings.AutoRestoreSelection, ElementName=FileList}" />
+                            </dxb:BarSubItem>                            
+                        </dxr:RibbonPageGroup>
+                    </dxr:RibbonPage>
+                </dxr:RibbonPageCategory>
+            </dxr:RibbonControl>
+            <DockPanel Margin="{LWThemeValue Default='4,8,8,2', Win11='4,4,6,4'}" DockPanel.Dock="Top">
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                    <Button Content="{StaticResource IconBack}" Style="{StaticResource FlatButtonStyle}" Command="{Binding MoveBackCommand}">
+                        <Button.ToolTip>
+                            <TextBlock>
+                                <Run Text="{Binding BackwardItem.Name, Converter={common:StringFormatConverter}, ConverterParameter=Backward}" />
+                                <Run Text="(Alt+&#x1F804;)"  />
+                            </TextBlock>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button Content="{StaticResource IconNext}" Style="{StaticResource FlatButtonStyle}" Command="{Binding MoveNextCommand}">
+                        <Button.ToolTip>
+                            <TextBlock>
+                                <Run Text="{Binding ForwardItem.Name, Converter={common:StringFormatConverter}, ConverterParameter=Forward}" />
+                                <Run Text="(Alt+&#x1F806;)"  />
+                            </TextBlock>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button dxb:BarManager.MenuShowMouseButton="LeftButton" Content="{StaticResource IconAngleDown}" 
+                            Style="{StaticResource FlatButtonStyle}" ToolTip="{Binding RecentLocations, Source={StaticResource ResourceProvider}}"
+                            IsEnabled="{Binding RecentLocations.Count, Converter={dxmvvm:NumericToBooleanConverter}}">
+                        <dxb:BarManager.DXContextMenu>
+                            <dxb:PopupMenu MaxHeight="600" ItemLinksSource="{Binding RecentLocations}">
+                                <dxb:PopupMenu.ItemTemplate>
+                                    <DataTemplate>
+                                        <ContentControl>
+                                            <dxb:BarButtonItem Content="{Binding Name}" Glyph="{Binding SmallIcon}" ToolTip="{Binding FullPath}" CommandParameter="{Binding}"
+                                                               Command="{Binding DataContext.OpenItemCommand, RelativeSource={RelativeSource AncestorType=Button}}" />
+                                        </ContentControl>
+                                    </DataTemplate>
+                                </dxb:PopupMenu.ItemTemplate>
+                            </dxb:PopupMenu>
+                        </dxb:BarManager.DXContextMenu>
+                    </Button>
+                    <Button Content="{StaticResource IconUp}" Style="{StaticResource FlatButtonStyle}" Command="{Binding MoveUpCommand}">
+                        <Button.ToolTip>
+                            <TextBlock>
+                                <Run Text="{Binding CurrentFolder.Parent.Name, Converter={common:StringFormatConverter}, ConverterParameter=Up}" />
+                                <Run Text=" (Alt+&#x1F805;)"  />
+                            </TextBlock>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button Content="{StaticResource IconRefresh}" Style="{StaticResource FlatButtonStyle}" Command="{Binding RefreshCommand}">
+                        <Button.ToolTip>
+                            <TextBlock Text="{Binding Refresh, Source={StaticResource ResourceProvider}}">
+                                <Run Text=" (F5)"  />
+                            </TextBlock>
+                        </Button.ToolTip>
+                    </Button>
+                </StackPanel>                
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <dxe:ButtonEdit x:Name="SearchEdit" AllowDefaultButton="False" MinWidth="200" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" 
+                                    NullText="{Binding CurrentFolder.Name, Converter={common:StringFormatConverter}, ConverterParameter=SearchTitle}">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:KeyToCommand KeyGesture="Enter" Event="PreviewKeyDown" MarkRoutedEventsAsHandled="True"
+                                                 Command="{Binding SearchCommand}" CommandParameter="{Binding Text, ElementName=SearchEdit}" />
+                            <common:WindowKeyToCommand KeyGesture="Ctrl+F" Command="{DXCommand '@e(SearchEdit).Focus()'}" />
+                        </dxmvvm:Interaction.Behaviors>
+                        <dxe:ButtonEdit.ToolTip>
+                            <TextBlock Text="{Binding Search, Source={StaticResource ResourceProvider}}">
+                                <Run Text=" (Ctrl+F)"  />
+                            </TextBlock>
+                        </dxe:ButtonEdit.ToolTip>
+                        <dxe:ButtonInfo IsLeft="True" GlyphKind="Search" Command="{Binding SearchCommand}" CommandParameter="{Binding Text, ElementName=SearchEdit}" />
+                        <dxe:ButtonInfo GlyphKind="Cancel" Command="{DXCommand 'SearchText = ``'}"
+                                        Visibility="{DXBinding '!SearchCommand.IsExecuting and SearchText != ``', Converter={dxmvvm:BooleanToVisibilityConverter}}"/>
+                        <dxe:ButtonInfo GlyphKind="Cancel" Command="{Binding SearchCommand.CancelCommand}"
+                                        Visibility="{Binding SearchCommand.IsExecuting, Converter={dxmvvm:BooleanToVisibilityConverter}}" />
+                    </dxe:ButtonEdit>
+                </StackPanel>
+                <controls:BreadCrumbControl x:Name="BreadCrumb" Margin="8,0" CurrentItem="{Binding CurrentFolder, Mode=OneWay}" ShowHiddenItems="{Binding Settings.ShowHiddenItems}" ShowSystemItems="{Binding Settings.ShowSystemItems}"
+                                            ItemClickCommand="{Binding OpenItemCommand}" ItemMiddleClickCommand="{Binding OpenInNewTabCommand}" NavigatePathCommand="{Binding NavigatePathCommand}">
+                    <dxmvvm:Interaction.Behaviors>
+                        <common:WindowKeyToCommand KeyGesture="Ctrl+L" Command="{DXCommand '@e(BreadCrumb).Edit()'}" />
+                        <common:WindowKeyToCommand KeyGesture="Alt+D" Command="{DXCommand '@e(BreadCrumb).Edit()'}" />
+                    </dxmvvm:Interaction.Behaviors>
+                </controls:BreadCrumbControl>
+            </DockPanel>
+    </DockPanel>
+</UserControl>
